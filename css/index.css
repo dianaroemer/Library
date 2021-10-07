@@ -26,6 +26,9 @@ nav {
     flex-wrap: wrap;
     padding: 5px 0;
 
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 0px 7px black;
+
 }
 
 .nav-title {
@@ -56,6 +59,9 @@ nav ul li {
 .shelf {
     padding: 10px 10px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
 }
 
 .slot {
@@ -65,7 +71,7 @@ nav ul li {
     box-shadow: 0px 0px 7px;
     border-radius: 5px;
     padding: 2px;
-    margin: 15px 15px;
+    margin: 15px 25px;
 
     text-align: center;
     line-height: 25px;
@@ -92,14 +98,20 @@ nav ul li {
     right: 5px;
 }
 
-
-
 .slot-icon {
     max-height: 180px;
     max-width: 180px;
+    height: 100px;
     padding: 10px;
     border-radius: 5px;
 }
 
+.slot-button {
+    margin-top: 3px;
+    padding: 4px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px gray;
+    /* background-color: hotpink; */
+}
 
 
