@@ -88,7 +88,7 @@ function addBookToLibrary() {
     // myLibrary[myLibrary.length] = gameInstance;
 
     // For Testing use
-    let gameName = "Nutter Butter Peanut Fucker"
+    let gameName = "Nutter Butter"
     let platform = "Steam"
     let owned = true;
     let desireToPlay = 3;
