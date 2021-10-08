@@ -8,7 +8,7 @@ let myLibrary = [];
 const shelf = document.querySelector(`.shelf`);
 
 // -------------------------------- Constructor --------------------------------
-// Object constructor to make book objects
+// Object constructor to make game objects
 const Game = function() {
     let name;
     let platform;
@@ -19,14 +19,36 @@ const Game = function() {
     let div;
 }
 
-Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, beat, div){
+Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, beat){
     this.name = name;
     this.platform = platform;
     this.owned = owned;
     this.desireToPlay = desireToPlay;
     this.icon = icon;
     this.beat = beat;
-    this.div = div;
+    this.div = document.createElement('div');
+    this.div.setAttribute('class', `slot`);
+
+    this.displayName = this.name;
+
+    if(this.name.length >= 19) {
+        this.displayName = this.name.slice(0, 19) + "...";
+    }
+
+    // this.div.innerHTML = '';
+
+    // Build the div's innerHTML to standardized format
+    this.div.innerHTML = `<div class="platform-icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam Game Platform Logo" class="slot-platform-icon">
+        </div class="platform-icon">`;
+    this.div.innerHTML += `<img src="https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg" alt="Destiny 2 Video Game Logo" class="slot-icon">`
+    this.div.innerHTML += `<b>${this.displayName}</b> <br>`;
+    this.div.innerHTML += `Owned: ${this.owned ? 'Yes' : 'No' } <br>`;
+    this.div.innerHTML += `Desire to Play: ${this.desireToPlay}/10 <br>`;
+    this.div.innerHTML += `Beat: ${this.beat ? "True" : "False" } <br>`;
+    this.div.innerHTML += `<button class="slot-button">Modify</button>`;
+
+
     return this;
 }
 
@@ -39,13 +61,13 @@ Game.prototype.readState = function() {
 
 
 // Sample games to fill myLibrary[] for functionality testing AND for default games to load on empty browsers with no localStorage of their own
-let destiny = Object.create(Game.prototype).initGame('Destiny 2', 'Steam', true, 8, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true, null);
+let destiny = Object.create(Game.prototype).initGame('Destiny 2', 'Steam', true, 8, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true);
 // destiny.readState();
 
-let doom = Object.create(Game.prototype).initGame('Doom Eternal', 'Steam', true, 9, '.', false, null);
+let doom = Object.create(Game.prototype).initGame('Doom Eternal', 'Steam', true, 9, '.', false);
 // doom.readState();
 
-let monsterHunter = Object.create(Game.prototype).initGame('Monster Hunter: Rise', 'Switch', true, 9, '.', false, null);
+let monsterHunter = Object.create(Game.prototype).initGame('Monster Hunter: Rise', 'Switch', true, 9, '.', false);
 // monsterHunter.readState();
 
 myLibrary[0] = destiny;
@@ -66,44 +88,34 @@ function addBookToLibrary() {
     // myLibrary[myLibrary.length] = gameInstance;
 
     // For Testing use
-    let gameName = "Hearthstone"
+    let gameName = "Nutter Butter Peanut Fucker"
     let platform = "Steam"
     let owned = true;
     let desireToPlay = 3;
     let icon = "http://images.ctfassets.net/rporu91m20dc/3xdOAVjV4Q8CeSmg4UcK4K/5c9eff913b6b2c6c06f667a234e1464e/DOOM_LargeHero_Announce.jpg";
     let beat = false;
-    let div = document.createElement('div');
-    div.setAttribute('class', 'slot');
-    div.innerHTML = 'It was me, Barry! It was me the whole time~!' // to be replace with buildHTML's return
 
     
-    let gameInstance = Object.create(Game.prototype).initGame(gameName, platform, owned, desireToPlay, icon, beat, div);
+    let gameInstance = Object.create(Game.prototype).initGame(gameName, platform, owned, desireToPlay, icon, beat);
 
     myLibrary[myLibrary.length] = gameInstance;
     
 }
 
-// console.log(myLibrary);
-
 addBookToLibrary();
 shelf.appendChild(myLibrary[myLibrary.length -1 ].div);
 
-// console.log(myLibrary);
-
-// console.log(myLibrary[0].readState());
-// console.log(myLibrary[3].readState());
-
 // myLibrary[3].div.innerHTML = myLibrary[3].name;
 
-myLibrary[3].div.innerHTML = `<div class="platform-icon">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam Game Platform Logo" class="slot-platform-icon">
-</div class="platform-icon">`;
-myLibrary[3].div.innerHTML += `<img src="https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg" alt="Destiny 2 Video Game Logo" class="slot-icon">`
-myLibrary[3].div.innerHTML += `${myLibrary[3].name} <br>`;
-myLibrary[3].div.innerHTML += `Owned: ${myLibrary[3].owned ? 'Yes' : 'No' } <br>`;
-myLibrary[3].div.innerHTML += `Desire to Play: ${myLibrary[3].desireToPlay}/10 <br>`;
-myLibrary[3].div.innerHTML += `Beat: ${myLibrary[3].beat ? "True" : "False" } <br>`;
-myLibrary[3].div.innerHTML += `<button class="slot-button">Modify</button>`;
+// myLibrary[3].div.innerHTML = `<div class="platform-icon">
+// <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam Game Platform Logo" class="slot-platform-icon">
+// </div class="platform-icon">`;
+// myLibrary[3].div.innerHTML += `<img src="https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg" alt="Destiny 2 Video Game Logo" class="slot-icon">`
+// myLibrary[3].div.innerHTML += `${myLibrary[3].name} <br>`;
+// myLibrary[3].div.innerHTML += `Owned: ${myLibrary[3].owned ? 'Yes' : 'No' } <br>`;
+// myLibrary[3].div.innerHTML += `Desire to Play: ${myLibrary[3].desireToPlay}/10 <br>`;
+// myLibrary[3].div.innerHTML += `Beat: ${myLibrary[3].beat ? "True" : "False" } <br>`;
+// myLibrary[3].div.innerHTML += `<button class="slot-button">Modify</button>`;
 
 
 
