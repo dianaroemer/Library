@@ -115,3 +115,11 @@ nav ul li {
 }
 
 
+.query {
+    position: absolute;
+    text-align:center;
+    height: 500px;
+    width: 400px;
+    background-color: hotpink;
+
+}
