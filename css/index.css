@@ -123,3 +123,71 @@ nav ul li {
     background-color: hotpink;
 
 }
+
+.addSlot {
+    display: block;
+    position: absolute;
+    height: 62px;
+    width: 62px;
+    border-radius: 40px;
+    font-size: 30px;
+    bottom: 35px;
+    right: 40px;
+    background-color: #EBBCBC;
+    box-shadow: 0 0 4px;
+    border-width: 1px;
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.1s;
+    cursor:pointer;
+}
+
+.addSlot:hover {
+    background-color: #c79c9c;
+    transition-duration: .2s;
+    transform: scale(1.1) rotate(180deg);
+
+}
+
+.addSlot:active {
+    background-color: #fffafa;
+    transform: translateY(4px);
+    transition-duration: 0;
+}
+
+.queryMenu {
+    display: block;
+    position: absolute;
+    background-color: #555358;
+    width:350px;
+    height: 180px;
+/*     
+    max-height: 200px;
+    min-height: 160px; */
+    top: calc(50% - 90px);
+    left: calc(50% - 175px);
+}
+
+.queryMenuContainer {
+    margin: 10px;
+    background-color: #afb1b6;
+    padding: 10px;
+}
+
+.queryMenuInput {
+    border: solid;
+    border-width: 2px;
+    margin: 2px;
+    width: max-content;
+    padding: 3px;
+}
+
+.queryMenuCheck {
+    border: solid;
+    border-width: 20px;
+    margin: 2px;
+}
+
+.queryMenuSlider {
+    margin-left: 5px;
+    margin-right: 5px;
+}

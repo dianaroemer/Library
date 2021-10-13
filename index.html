@@ -211,13 +211,55 @@
                 <br>
                 Beat: False
                 <br>
-            </div>
- -->
+            </div> -->
+
 
             
 
         </div>
 
+        <button class="addSlot"> + </button>
+
+        <div class="queryMenu">
+
+            <div class="queryMenuContainer"> 
+
+                Name:
+                <input class="queryMenuInput" value="What is the game's name?">
+                <!-- <label for="gameName">Test</label> -->
+                <br>
+
+                Logo:
+                <input type="url" class="queryMenuInput" value="Link to a .jpg logo">
+                <br>
+
+                Owned:
+                <input type="checkbox" class="queryMenuCheck">
+                <br>
+
+                Desire to Play:
+                <input type="range" min="1" max="10" value="5" class="queryMenuSlider" oninput="this.nextElementSibling.value = this.value">
+                <output>5</output>
+                <br>
+
+                Beat?:
+                <input type="checkbox" class="queryMenuCheck">
+                <br>
+
+                Console:
+                <input type="radio" value="pc" class="queryMenuRadio" name="console">
+                    <label for="pc">PC</label>
+                <input type="radio" value="ps4" class="queryMenuRadio" name="console">
+                    <label for="pc">PS4</label>
+                <input type="radio" value="xbox" class="queryMenuRadio" name="console">
+                    <label for="pc">Xbox</label>
+                <input type="radio" value="switch" class="queryMenuRadio" name="console">
+                    <label for="pc">Switch</label>    
+
+            </div>
+
+
+        </div>
 
     </div>
     

@@ -7,6 +7,11 @@ function init () {
 let myLibrary = [];
 const shelf = document.querySelector(`.shelf`);
 
+const addSlot = document.querySelector(`.addSlot`);
+addSlot.addEventListener('click', () => {
+    console.log('You clicked the addSlot button');
+});
+
 // -------------------------------- Constructor --------------------------------
 // Object constructor to make game objects
 const Game = function() {
