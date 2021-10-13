@@ -8,9 +8,24 @@ let myLibrary = [];
 const shelf = document.querySelector(`.shelf`);
 
 const addSlot = document.querySelector(`.addSlot`);
+const queryMenu = document.querySelector('.queryMenu');
 addSlot.addEventListener('click', () => {
-    console.log('You clicked the addSlot button');
+
+    let queryMenuDisplay = queryMenu.style.display;
+
+    if ( queryMenuDisplay === 'none' ) {
+        queryMenu.style.display = 'block'
+    } else {
+        queryMenu.style.display = 'none';
+    }
+    
+ 
+
+    
+    // console.log('You clicked the addSlot button');
 });
+
+// const 
 
 // -------------------------------- Constructor --------------------------------
 // Object constructor to make game objects
