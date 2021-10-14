@@ -157,7 +157,7 @@ nav ul li {
 
 /* ---------------- This is the styling for the query menu ---------------- */
 .queryMenu {
-    display: block;
+    display: none;
     position: absolute;
     background-color: #555358;
     width:350px;

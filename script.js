@@ -1,5 +1,8 @@
 // Initiator function that builds all relevant variables and instantiates them appropriately
 function init () {
+
+    // queryMenu.style.display = 'block';
+
     return;
 }
 
@@ -9,23 +12,26 @@ const shelf = document.querySelector(`.shelf`);
 
 const addSlot = document.querySelector(`.addSlot`);
 const queryMenu = document.querySelector('.queryMenu');
+// menuOpen prevents the user from clicking additional modify buttons or add buttons whenever a queryMenu is already open
+let menuOpen = false;
 addSlot.addEventListener('click', () => {
 
     let queryMenuDisplay = queryMenu.style.display;
 
-    if ( queryMenuDisplay === 'none' ) {
-        queryMenu.style.display = 'block'
+    if ( queryMenuDisplay === 'block' ) {
+        queryMenu.style.display = 'none'
+        menuOpen = false;
     } else {
-        queryMenu.style.display = 'none';
+        queryMenu.style.display = 'block';
+        menuOpen = true;
     }
-    
- 
-
     
     // console.log('You clicked the addSlot button');
 });
 
-// const 
+
+
+
 
 // -------------------------------- Constructor --------------------------------
 // Object constructor to make game objects
@@ -142,6 +148,30 @@ function updateDisplay() {
 
 }
 
+
+let sample = document.querySelectorAll('.slot-button');
+
+
+sample.forEach(element => {
+    // console.log(element);
+    element.addEventListener('click', ((e) => {
+        // console.log(e.target);
+
+        if ( menuOpen) return;
+
+        let index = 0;
+
+        // for...of loop that loops over all nodeTargets of sample and compares them to the clicked object. When equal, return the index of the object passed to myLibrary, targeting the clicked button's parent object
+        for( let nodeTarget of sample ) {
+            if( nodeTarget === e.target){
+                console.log(myLibrary[index].name);
+                return;
+            }
+            index++;
+        }
+        console.log(index);
+    }));
+});
 
 
 init();
