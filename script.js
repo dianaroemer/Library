@@ -3,6 +3,10 @@ function init () {
 
     // queryMenu.style.display = 'block';
 
+    addBookToLibrary();
+
+    addEventListenerToModify();
+
     return;
 }
 
@@ -12,12 +16,16 @@ const shelf = document.querySelector(`.shelf`);
 
 const addSlot = document.querySelector(`.addSlot`);
 const queryMenu = document.querySelector('.queryMenu');
+const querySaveButton = document.querySelector('#querySaveButton');
+const queryDeleteButton = document.querySelector('#queryDeleteButton');
 // menuOpen prevents the user from clicking additional modify buttons or add buttons whenever a queryMenu is already open
 let menuOpen = false;
-addSlot.addEventListener('click', () => {
+
+
+// This function toggles the visibility of the queryMenu
+function toggleQueryMenu () {
 
     let queryMenuDisplay = queryMenu.style.display;
-
     if ( queryMenuDisplay === 'block' ) {
         queryMenu.style.display = 'none'
         menuOpen = false;
@@ -25,9 +33,60 @@ addSlot.addEventListener('click', () => {
         queryMenu.style.display = 'block';
         menuOpen = true;
     }
-    
-    // console.log('You clicked the addSlot button');
+
+}
+
+
+// ------------------------------- EventListeners ------------------------------
+
+addSlot.addEventListener('click', () => {
+    toggleQueryMenu();
 });
+
+querySaveButton.addEventListener('click', () => {
+    console.log('You clicked on the querySaveButton');
+    // XXXUPDATEXXX Add functionality here
+    toggleQueryMenu();
+});
+
+queryDeleteButton.addEventListener('click', () => {
+    console.log('You clicked on the queryDeleteButton');
+    // XXXUPDATEXXX Add functionality here
+    toggleQueryMenu();
+});
+
+
+// addEventListenerToModify finds all of the current modify buttons and adds a 'click' EventListener that returns the clicked object and opens the queryMenu targeting the clicked object
+// This eventListener is set as a function because it will need to be called whenever a new gameObject and subsequent .slot are added, as their new modify elements will need their own eventListeners.
+    // This functionality could be changed to be more efficient - instead of adding event listeners to every modifyButton whenever the Library is changed, it could add EventListener's once at init(), and only again when adding a new singular gameObject.
+function addEventListenerToModify () {
+
+    let buttonList = document.querySelectorAll('.slot-button');
+
+    buttonList.forEach(element => {
+        // console.log(element);
+        element.addEventListener('click', ((e) => {
+            // console.log(e.target);
+    
+            if ( menuOpen) return;
+    
+            let index = 0;
+    
+            // for...of loop that loops over all nodeTargets of buttonList and compares them to the clicked object. When equal, return the index of the object passed to myLibrary, targeting the clicked button's parent object
+            for( let nodeTarget of buttonList ) {
+                if( nodeTarget === e.target){
+                    console.log(myLibrary[index].name);
+                    // XXXUPDATEXXX This function needs to tie in to which button calls it
+                    toggleQueryMenu();
+
+                    return;
+                }
+                index++;
+            }
+            // console.log(index);
+        }));
+    });
+}
 
 
 
@@ -135,7 +194,37 @@ function addBookToLibrary() {
     
 }
 
-addBookToLibrary();
+// ---------------------------- queryMenu Functions ----------------------------
+
+function readQueryMenu() {
+
+    let gameName = document.querySelector('#queryMenuName').value;
+    let gameLogo = document.querySelector('#queryMenuLogo').value;
+    let gameOwned = document.querySelector('#queryMenuOwned').checked;
+    let gameDesire = document.querySelector('#queryMenuDesire').value;
+    let gameBeat = document.querySelector('#queryMenuBeat').checked;
+
+    let gameConsole;
+    // Console identifier
+    let consoleList = document.querySelectorAll('.queryMenuRadio');
+    consoleList.forEach(element => {
+        if(element.checked) {
+            gameConsole = element.value;
+        }
+    })
+
+    // console.log(gameName);
+    // console.log(gameLogo);
+    // console.log(gameOwned);
+    // console.log(gameDesire);
+    // console.log(gameBeat);
+    // console.log(gameConsole);
+
+    return;
+
+}
+
+readQueryMenu();
 
 
 
@@ -144,34 +233,13 @@ addBookToLibrary();
 function updateDisplay() {
 
     myLibrary.forEach( e => console.log(e));
+
+    // XXXUPDATEXXX ADD FUNCTIONALITY HERE
+
     return console.log("updateDisplay completed its runtime & hit its return");
 
 }
 
-
-let sample = document.querySelectorAll('.slot-button');
-
-
-sample.forEach(element => {
-    // console.log(element);
-    element.addEventListener('click', ((e) => {
-        // console.log(e.target);
-
-        if ( menuOpen) return;
-
-        let index = 0;
-
-        // for...of loop that loops over all nodeTargets of sample and compares them to the clicked object. When equal, return the index of the object passed to myLibrary, targeting the clicked button's parent object
-        for( let nodeTarget of sample ) {
-            if( nodeTarget === e.target){
-                console.log(myLibrary[index].name);
-                return;
-            }
-            index++;
-        }
-        console.log(index);
-    }));
-});
 
 
 init();
