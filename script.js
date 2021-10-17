@@ -3,7 +3,7 @@ function init () {
 
     // queryMenu.style.display = 'block';
 
-    addBookToLibrary();
+    // addBookToLibrary();
 
     addEventListenerToModify();
 
@@ -46,6 +46,16 @@ addSlot.addEventListener('click', () => {
 querySaveButton.addEventListener('click', () => {
     console.log('You clicked on the querySaveButton');
     // XXXUPDATEXXX Add functionality here
+
+    let gameInformation = readQueryMenu();
+
+    console.log(gameInformation);
+
+    addGameToLibrary(gameInformation);
+
+    // Add EventListener to new gameObject's modify button
+    addEventListenerToModify();
+
     toggleQueryMenu();
 });
 
@@ -92,6 +102,7 @@ function addEventListenerToModify () {
 
 
 
+
 // -------------------------------- Constructor --------------------------------
 // Object constructor to make game objects
 const Game = function() {
@@ -106,7 +117,7 @@ const Game = function() {
 
 Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, beat){
     this.name = name;
-    this.platform = platform;
+    // this.platform = platform;
     this.owned = owned;
     this.desireToPlay = desireToPlay;
     this.icon = icon;
@@ -114,8 +125,23 @@ Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, be
     this.div = document.createElement('div');
     this.div.setAttribute('class', `slot`);
 
-    this.displayName = this.name;
+    switch (platform) {
+        case "pc":
+            this.platform = "https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg";
+            break;
+        case "ps4":
+            this.platform = "https://www.playstation.com/etc.clientlibs/global_pdc/clientlibs/clientlib-base/resources/ps-bug.svg";
+            break;
+        case "xbox":
+            this.platform = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Xbox_logo_%282019%29.svg";
+            break;
+        case "switch":
+            this.platform = "https://assets.nintendo.com/image/upload/f_auto,q_auto/Dev/aem-component-demo/switch-logo-large?v=2021092417";
+            break;
 
+    }
+
+    this.displayName = this.name;
     if(this.name.length >= 19) {
         this.displayName = this.name.slice(0, 19) + "...";
     }
@@ -123,10 +149,8 @@ Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, be
     // this.div.innerHTML = '';
 
     // Build the div's innerHTML to standardized format
-    this.div.innerHTML = `<div class="platform-icon">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg" alt="Steam Game Platform Logo" class="slot-platform-icon">
-        </div class="platform-icon">`;
-    this.div.innerHTML += `<img src="https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg" alt="Destiny 2 Video Game Logo" class="slot-icon">`
+    this.div.innerHTML = `<div class="platform-icon"> <img src='${this.platform}' alt="${this.platform} Game Platform Logo" class="slot-platform-icon">      </div class="platform-icon">`;
+    this.div.innerHTML += `<img src="${this.icon}" alt="${this.name} Video Game Logo" class="slot-icon">`
     this.div.innerHTML += `<b>${this.displayName}</b> <br>`;
     this.div.innerHTML += `Owned: ${this.owned ? 'Yes' : 'No' } <br>`;
     this.div.innerHTML += `Desire to Play: ${this.desireToPlay}/10 <br>`;
@@ -146,13 +170,13 @@ Game.prototype.readState = function() {
 
 
 // Sample games to fill myLibrary[] for functionality testing AND for default games to load on empty browsers with no localStorage of their own
-let destiny = Object.create(Game.prototype).initGame('Destiny 2', 'Steam', true, 8, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true);
+let destiny = Object.create(Game.prototype).initGame('Destiny 2', 'pc', true, 8, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true);
 // destiny.readState();
 
-let doom = Object.create(Game.prototype).initGame('Doom Eternal', 'Steam', true, 9, '.', false);
+let doom = Object.create(Game.prototype).initGame('Doom Eternal', 'pc', true, 9, '.', false);
 // doom.readState();
 
-let monsterHunter = Object.create(Game.prototype).initGame('Monster Hunter: Rise', 'Switch', true, 9, '.', false);
+let monsterHunter = Object.create(Game.prototype).initGame('Monster Hunter: Rise', 'switch', true, 9, '.', false);
 // monsterHunter.readState();
 
 myLibrary[0] = destiny;
@@ -163,7 +187,7 @@ myLibrary[2] = monsterHunter;
 // ----------------------------- Library Functions -----------------------------
 
 // This function take's a user's input and creates new game object, attaches gameInstance to myLibrary[], and appends the game object to shelf.
-function addBookToLibrary() {
+function addBookToLibrary(  ) {
 
     // Prompt user details for info about the game
     // let gameName = window.prompt('', '');
@@ -191,15 +215,38 @@ function addBookToLibrary() {
 
     // Add gameInstance to DOM 
     shelf.appendChild(gameInstance.div);
+
     
 }
 
+
+function addGameToLibrary( gameInfo ) {
+
+    console.log(gameInfo[0]);
+
+    let gameName = gameInfo[0];
+    let icon = gameInfo[1];
+    let owned = gameInfo[2];
+    let desireToPlay = gameInfo[3]
+    let beat = gameInfo[4];
+    let platform = gameInfo[5];
+
+    // let gameInstance = Object.create(Game.prototype).initGame(gameName, platform, owned, desireToPlay, icon, beat);
+    gameInstance = Object.create(Game.prototype).initGame(gameName, platform, owned, desireToPlay, icon, beat);
+
+    // Add reference to gameInstance to myLibrary for later read, update, destroy functions
+    myLibrary[myLibrary.length] = gameInstance;
+
+    // Add gameInstance to DOM 
+    shelf.appendChild(gameInstance.div);
+
+}
 // ---------------------------- queryMenu Functions ----------------------------
 
 function readQueryMenu() {
 
     let gameName = document.querySelector('#queryMenuName').value;
-    let gameLogo = document.querySelector('#queryMenuLogo').value;
+    let gameIcon = document.querySelector('#queryMenuIcon').value;
     let gameOwned = document.querySelector('#queryMenuOwned').checked;
     let gameDesire = document.querySelector('#queryMenuDesire').value;
     let gameBeat = document.querySelector('#queryMenuBeat').checked;
@@ -214,19 +261,23 @@ function readQueryMenu() {
     })
 
     // console.log(gameName);
-    // console.log(gameLogo);
+    // console.log(gameIcon);
     // console.log(gameOwned);
     // console.log(gameDesire);
     // console.log(gameBeat);
     // console.log(gameConsole);
 
-    return;
+    let gameInformation = [gameName, gameIcon, gameOwned, gameDesire, gameBeat, gameConsole];
+
+    return gameInformation;
 
 }
 
-readQueryMenu();
 
 
+
+
+// ---------------------------- Display Functions ----------------------------
 
 
 // This function loops through myLibrary[] and displays each book on the page.
@@ -239,6 +290,8 @@ function updateDisplay() {
     return console.log("updateDisplay completed its runtime & hit its return");
 
 }
+
+
 
 
 
