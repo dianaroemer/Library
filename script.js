@@ -47,11 +47,11 @@ querySaveButton.addEventListener('click', () => {
     console.log('You clicked on the querySaveButton');
     // XXXUPDATEXXX Add functionality here
 
-    let gameInformation = readQueryMenu();
+    // let gameInformation = readQueryMenu();
 
-    console.log(gameInformation);
+    // console.log(gameInformation);
 
-    addGameToLibrary(gameInformation);
+    addGameToLibrary(readQueryMenu());
 
     // Add EventListener to new gameObject's modify button
     addEventListenerToModify();

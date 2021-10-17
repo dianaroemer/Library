@@ -1,5 +1,28 @@
 # Library
 
+TO DO:
+ - Pass game object arguments to queryMenu 
+ - Pass queryMenu value arguments to new/old gameObject
+ - CRUD 
+    - Create new game object - DONE
+    - Read Existing game object
+         - Read an object's current state - DONE
+         - Pass that information to queryMenu
+    - Update Existing game object
+         - Read an objects existing current state
+         - Pass that information to queryMenu
+         - Read queryMenu's updated information on saveButton 'click'
+         - Pass updated information back to the object
+         - UpdateDisplay to show newly modified gameObject in .slot
+    - Remove existing game object
+         - Query user with "Are you sure?"(aYS) Prompt
+             - Show aYS prompt
+             - On yes, hide aYS prompt, hide queryMenu prompt
+         - Slice selected object out of myLibrary[]
+         - UpdateDisplay to show updated .shelf
+
+
+
 1. If you haven’t already, set up your project with skeleton HTML/CSS and JS files.
 2. All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array. Your code should look something like this:
 
