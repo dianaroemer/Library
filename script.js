@@ -44,12 +44,7 @@ addSlot.addEventListener('click', () => {
 });
 
 querySaveButton.addEventListener('click', () => {
-    console.log('You clicked on the querySaveButton');
-    // XXXUPDATEXXX Add functionality here
-
-    // let gameInformation = readQueryMenu();
-
-    // console.log(gameInformation);
+    // console.log('You clicked on the querySaveButton');
 
     addGameToLibrary(readQueryMenu());
 
@@ -97,9 +92,6 @@ function addEventListenerToModify () {
         }));
     });
 }
-
-
-
 
 
 
