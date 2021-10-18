@@ -126,7 +126,7 @@ nav ul li {
 
 .addSlot {
     display: block;
-    position: absolute;
+    position: fixed;
     height: 62px;
     width: 62px;
     border-radius: 40px;
@@ -158,7 +158,7 @@ nav ul li {
 /* ---------------- This is the styling for the query menu ---------------- */
 .queryMenu {
     display: none;
-    position: absolute;
+    position: fixed;
     background-color: #555358;
     width:350px;
     height: 208px;

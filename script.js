@@ -18,9 +18,10 @@ function init () {
 // Add sample games to Library
 function sampleGames() {
 
-    let destiny = Object.create(Game.prototype).initGame('Destiny 2', 'pc', true, 8, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true);
-    let doom = Object.create(Game.prototype).initGame('Doom Eternal', 'pc', true, 9, 'http://images.ctfassets.net/rporu91m20dc/3xdOAVjV4Q8CeSmg4UcK4K/5c9eff913b6b2c6c06f667a234e1464e/DOOM_LargeHero_Announce.jpg', false);
+    let destiny = Object.create(Game.prototype).initGame('Destiny 2', 'pc', true, 6, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true);
+    let doom = Object.create(Game.prototype).initGame('Doom Eternal', 'xbox', true, 7, 'http://images.ctfassets.net/rporu91m20dc/3xdOAVjV4Q8CeSmg4UcK4K/5c9eff913b6b2c6c06f667a234e1464e/DOOM_LargeHero_Announce.jpg', false);
     let monsterHunter = Object.create(Game.prototype).initGame('Monster Hunter: Rise', 'switch', true, 9, 'https://i1.wp.com/mynintendonews.com/wp-content/uploads/2020/09/monster_hunter_rise_logo.jpg', false);
+    Object.create(Game.prototype).initGame('Last of Us 2', 'ps4', true, 8, 'https://media.wired.co.uk/photos/606d9a7ba876dd2203a63a58/master/w_960,c_limit/the-last-of-us-part-2-credit-naughty-dog2000x1270-1.jpg', false);
 
     // myLibrary[0] = destiny;
     // myLibrary[1] = doom;
@@ -120,7 +121,6 @@ const Game = function() {
     let div;
 
     let displayName;
-    let platformLink;
 }
 
 Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, beat){
@@ -133,21 +133,6 @@ Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, be
     this.div = document.createElement('div');
     this.div.setAttribute('class', `slot`);
 
-    switch (platform) {
-        case "pc":
-            this.platformLink = "https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg";
-            break;
-        case "ps4":
-            this.platformLink = "https://www.playstation.com/etc.clientlibs/global_pdc/clientlibs/clientlib-base/resources/ps-bug.svg";
-            break;
-        case "xbox":
-            this.platformLink = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Xbox_logo_%282019%29.svg";
-            break;
-        case "switch":
-            this.platformLink = "https://assets.nintendo.com/image/upload/f_auto,q_auto/Dev/aem-component-demo/switch-logo-large?v=2021092417";
-            break;
-
-    }
 
     this.displayName = this.name;
     if(this.name.length >= 19) {
@@ -172,7 +157,26 @@ Game.prototype.readState = function() {
 // This is a helper function for each gameObject that auto-generates the standard format innerHTML according to a standardized preset. This should only be called during initGame and during updateGame (when the modify button is called)
 Game.prototype.generateInnerHTML = function() {
 
-    this.div.innerHTML = `<div class="platform-icon"> <img src='${this.platformLink}' alt="${this.platform} Game Platform Logo" class="slot-platform-icon">      </div class="platform-icon">`;
+    let platformLink;
+
+    switch (this.platform) {
+        case "pc":
+            platformLink = "https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg";
+            break;
+        case "ps4":
+            platformLink = "https://www.playstation.com/etc.clientlibs/global_pdc/clientlibs/clientlib-base/resources/ps-bug.svg";
+            break;
+        case "xbox":
+            platformLink = "https://upload.wikimedia.org/wikipedia/commons/d/d7/Xbox_logo_%282019%29.svg";
+            break;
+        case "switch":
+            platformLink = "https://assets.nintendo.com/image/upload/f_auto,q_auto/Dev/aem-component-demo/switch-logo-large?v=2021092417";
+            break;
+
+    }
+
+
+    this.div.innerHTML = `<div class="platform-icon"> <img src='${platformLink}' alt="${this.platform} Game Platform Logo" class="slot-platform-icon">      </div class="platform-icon">`;
     this.div.innerHTML += `<img src="${this.icon}" alt="${this.name} Video Game Logo" class="slot-icon">`
     this.div.innerHTML += `<b>${this.displayName}</b> <br>`;
     this.div.innerHTML += `Owned: ${this.owned ? 'Yes' : 'No' } <br>`;
