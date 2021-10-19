@@ -1,9 +1,6 @@
 // Initiator function that builds all relevant variables and instantiates them appropriately
 function init () {
 
-    // queryMenu.style.display = 'block';
-
-    // addBookToLibrary();
 
     // Add sample games to library
     sampleGames();
@@ -18,9 +15,9 @@ function init () {
 // Add sample games to Library
 function sampleGames() {
 
-    let destiny = Object.create(Game.prototype).initGame('Destiny 2', 'pc', true, 6, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true);
-    let doom = Object.create(Game.prototype).initGame('Doom Eternal', 'xbox', true, 7, 'http://images.ctfassets.net/rporu91m20dc/3xdOAVjV4Q8CeSmg4UcK4K/5c9eff913b6b2c6c06f667a234e1464e/DOOM_LargeHero_Announce.jpg', false);
-    let monsterHunter = Object.create(Game.prototype).initGame('Monster Hunter: Rise', 'switch', true, 9, 'https://i1.wp.com/mynintendonews.com/wp-content/uploads/2020/09/monster_hunter_rise_logo.jpg', false);
+    Object.create(Game.prototype).initGame('Destiny 2', 'pc', true, 6, 'https://cdn.realsport101.com/images/ncavvykf/gfinityesports/156765e6c912ff3352a5c7e279cb425fb446baa3-1920x1080.jpg', true);
+    Object.create(Game.prototype).initGame('Doom Eternal', 'xbox', true, 7, 'http://images.ctfassets.net/rporu91m20dc/3xdOAVjV4Q8CeSmg4UcK4K/5c9eff913b6b2c6c06f667a234e1464e/DOOM_LargeHero_Announce.jpg', false);
+    Object.create(Game.prototype).initGame('Monster Hunter: Rise', 'switch', true, 9, 'https://i1.wp.com/mynintendonews.com/wp-content/uploads/2020/09/monster_hunter_rise_logo.jpg', false);
     Object.create(Game.prototype).initGame('Last of Us 2', 'ps4', true, 8, 'https://media.wired.co.uk/photos/606d9a7ba876dd2203a63a58/master/w_960,c_limit/the-last-of-us-part-2-credit-naughty-dog2000x1270-1.jpg', false);
 
     // myLibrary[0] = destiny;
