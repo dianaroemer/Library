@@ -47,6 +47,11 @@ let modifyTarget;
 // ------------------------------- EventListeners ------------------------------
 
 addSlot.addEventListener('click', () => {
+    
+    if(menuOpen) {
+        return;
+    }
+
     toggleQueryMenu();
 });
 
@@ -77,8 +82,23 @@ querySaveButton.addEventListener('click', () => {
 });
 
 queryDeleteButton.addEventListener('click', () => {
-    console.log('You clicked on the queryDeleteButton');
-    // XXXUPDATEXXX Add functionality here
+    // console.log('You clicked on the queryDeleteButton');
+
+    if(isModify) {
+        // console.log(`You're trying to delete an existing gameObject`);
+
+        let found = myLibrary.findIndex( element => {
+            return element == modifyTarget;
+        })
+
+        shelf.removeChild(modifyTarget.div);
+        
+        myLibrary.splice(found, 1);
+        
+        modifyTarget = null;
+        isModify = false
+    }
+
     toggleQueryMenu();
 });
 
@@ -104,19 +124,15 @@ function addEventListenerToModify () {
             isModify = true;
             let index = 0;
             // for...of loop that loops over all nodeTargets of buttonList and compares them to the clicked object. When equal, return the index of the object passed to myLibrary, targeting the clicked button's parent object
+                // Alternative method that reads cleaner would be to convert buttonList to an array, then use findIndex on the array, as seen in the queryDeleteButton EventListener above
             for( let nodeTarget of buttonList ) {
                 if( nodeTarget === e.target){
-                    // console.log(myLibrary[index].name);
-                    // XXXUPDATEXXX This function needs to tie in to which button calls it
                     toggleQueryMenu();
-
                     break;
                 }
                 index++;
             }
-            // console.log(index);
 
-            // console.log(`You've clicked on ${myLibrary[index].name} my dude`);
 
             updateQueryMenu(myLibrary[index]);
             modifyTarget = myLibrary[index];
@@ -348,7 +364,6 @@ function updateQueryMenu( gameObject ) {
 // This function loops through myLibrary[] and displays each book on the page.
 function updateDisplay() {
 
-    // myLibrary.forEach( e => console.log(e));
 
     myLibrary.forEach( e => {
         shelf.appendChild(e.div);
