@@ -39,6 +39,8 @@ const querySaveButton = document.querySelector('#querySaveButton');
 const queryDeleteButton = document.querySelector('#queryDeleteButton');
 // menuOpen prevents the user from clicking additional modify buttons or add buttons whenever a queryMenu is already open
 let menuOpen = false;
+let isModify = false;
+let modifyTarget;
 
 
 
@@ -51,7 +53,22 @@ addSlot.addEventListener('click', () => {
 querySaveButton.addEventListener('click', () => {
     // console.log('You clicked on the querySaveButton');
 
-    addGameToLibrary(readQueryMenu());
+    if(isModify) {
+
+        let queryResults = readQueryMenu();
+        modifyTarget.name = queryResults[0];
+        modifyTarget.icon = queryResults[1];
+        modifyTarget.owned = queryResults[2];
+        modifyTarget.desireToPlay = queryResults[3];
+        modifyTarget.beat = queryResults[4];
+        modifyTarget.platform = queryResults[5];
+        modifyTarget.generateInnerHTML()
+
+        modifyTarget = null;
+        isModify = false;
+    } else {
+        addGameToLibrary(readQueryMenu());
+    }
 
     // Add EventListener to new gameObject's modify button
     addEventListenerToModify();
@@ -79,15 +96,17 @@ function addEventListenerToModify () {
         element.addEventListener('click', ((e) => {
             
             // console.log(e.target);
-            
+    
+            // If an existing menu is already open, do not open another menu or change target
             if ( menuOpen ) return;
     
+            menuOpen = true;
+            isModify = true;
             let index = 0;
-    
             // for...of loop that loops over all nodeTargets of buttonList and compares them to the clicked object. When equal, return the index of the object passed to myLibrary, targeting the clicked button's parent object
             for( let nodeTarget of buttonList ) {
                 if( nodeTarget === e.target){
-                    console.log(myLibrary[index].name);
+                    // console.log(myLibrary[index].name);
                     // XXXUPDATEXXX This function needs to tie in to which button calls it
                     toggleQueryMenu();
 
@@ -97,10 +116,10 @@ function addEventListenerToModify () {
             }
             // console.log(index);
 
-
-            console.log(`You've clicked on ${myLibrary[index].name} my dude`);
+            // console.log(`You've clicked on ${myLibrary[index].name} my dude`);
 
             updateQueryMenu(myLibrary[index]);
+            modifyTarget = myLibrary[index];
 
             return; 
         }));
@@ -120,7 +139,6 @@ const Game = function() {
     let beat;
     let div;
 
-    let displayName;
 }
 
 Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, beat){
@@ -134,10 +152,6 @@ Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, be
     this.div.setAttribute('class', `slot`);
 
 
-    this.displayName = this.name;
-    if(this.name.length >= 19) {
-        this.displayName = this.name.slice(0, 19) + "...";
-    }
 
     // Build the div's innerHTML to standardized format
     this.generateInnerHTML();
@@ -172,13 +186,16 @@ Game.prototype.generateInnerHTML = function() {
         case "switch":
             platformLink = "https://assets.nintendo.com/image/upload/f_auto,q_auto/Dev/aem-component-demo/switch-logo-large?v=2021092417";
             break;
-
     }
 
+    let displayName = this.name;
+    if(displayName.length >= 19) {
+        displayName = displayName.slice(0, 19) + "...";
+    }
 
     this.div.innerHTML = `<div class="platform-icon"> <img src='${platformLink}' alt="${this.platform} Game Platform Logo" class="slot-platform-icon">      </div class="platform-icon">`;
     this.div.innerHTML += `<img src="${this.icon}" alt="${this.name} Video Game Logo" class="slot-icon">`
-    this.div.innerHTML += `<b>${this.displayName}</b> <br>`;
+    this.div.innerHTML += `<b>${displayName}</b> <br>`;
     this.div.innerHTML += `Owned: ${this.owned ? 'Yes' : 'No' } <br>`;
     this.div.innerHTML += `Desire to Play: ${this.desireToPlay}/10 <br>`;
     this.div.innerHTML += `Beat: ${this.beat ? "True" : "False" } <br>`;
@@ -290,8 +307,7 @@ function readQueryMenu() {
 
 function updateQueryMenu( gameObject ) {
 
-    // console.log(gameObject);
-
+    // These could be global constants because they're used by multiple functions
     document.querySelector('#queryMenuName').value = gameObject.name;
     document.querySelector('#queryMenuIcon').value = gameObject.icon;
     document.querySelector('#queryMenuOwned').checked = gameObject.owned;
@@ -300,17 +316,10 @@ function updateQueryMenu( gameObject ) {
     document.querySelector('#queryMenuBeat').checked = gameObject.beat;
 
     // Console selector logic
-    // console.log(document.querySelectorAll('.queryMenuRadio')[0]);
-    // document.querySelectorAll('.queryMenuRadio')[0].checked = false;
-    // document.querySelectorAll('.queryMenuRadio')[1].checked = true;
-
     let queryMenuRadioList = document.querySelectorAll('.queryMenuRadio');
     queryMenuRadioList.forEach(element => {
         element.checked = false;
     });
-
-    console.log(gameObject.platform);
-
     switch(gameObject.platform) {
 
         case "pc":
@@ -325,10 +334,7 @@ function updateQueryMenu( gameObject ) {
         case "switch":
             queryMenuRadioList[3].checked = true;
             break;
-
-
     };
-
 
 
 }
