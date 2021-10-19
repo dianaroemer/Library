@@ -24,6 +24,8 @@ TO DO:
              - On yes, hide aYS prompt, hide queryMenu prompt
          - Slice selected object out of myLibrary[]
          - UpdateDisplay to show updated .shelf
+ - Refactor the modifyButton EventListeners to instead be a part of each gameObject's initGame code, rather than an external, dedicated function. That way, each game object will automatically have it's dedicated modify functionality that already refers to it's own targeted object, rather than the convoluted mess I came up with
+
 
 
 
