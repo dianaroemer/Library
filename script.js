@@ -95,9 +95,13 @@ queryDeleteButton.addEventListener('click', () => {
     if(isModify) {
         // console.log(`You're trying to delete an existing gameObject`);
 
+        // console.log(modifyTarget);
+
         let found = myLibrary.findIndex( element => {
             return element == modifyTarget;
-        })
+        });
+
+        // console.log(found + " is my found index");
 
         shelf.removeChild(modifyTarget.div);
         
@@ -136,13 +140,15 @@ function addEventListenerToModify () {
                 if( nodeTarget === e.target){
                     toggleQueryMenu();
                     break;
+                } else {
+                    index++;
                 }
-                index++;
             }
 
 
-            updateQueryMenu(myLibrary[index]);
             modifyTarget = myLibrary[index];
+
+            updateQueryMenu(myLibrary[index]);
 
             return; 
         }));
@@ -437,16 +443,99 @@ function isLocalStorageEmpty() {
     }
 }
 
-localStorage.setItem('test', 'bigger test');
-localStorage.setItem('myLibraryLength', myLibrary.length);
+// localStorage.setItem('test', 'bigger test');
+// localStorage.setItem('myLibraryLength', myLibrary.length);
 
 // How do I convert myLibrary to a reasonable string
     // Include a myLibrary length value
 
-localStorage.getItem
+function toLocalStorage ( library ) {
+
+    // To-Do
+        // Clear existing localStorage
+        // Convert myLibrary information to DOMString and pass to localStorage
+        // Covert each gameObject's info to DOMString and pass to localStorage
+
+    // Clear existing localStorage
+    localStorage.clear();
+
+        // If myLibrary is empty, don't add anything to localStorage
+    if( myLibrary.length === 0 ) {
+        return;
+    } else {
+
+        localStorage.setItem('myLibraryLength', `${library.length}`);
+        
+        let index = 0;
+        let findex = library.length;
+
+        while ( index != library.length ) {
+            localStorage.setItem(`myLibrary${index}Name`, `${library[index].name}`);
+            localStorage.setItem(`myLibrary${index}Platform`, `${library[index].platform}`);
+            localStorage.setItem(`myLibrary${index}Owned`, `${library[index].owned}`);
+            localStorage.setItem(`myLibrary${index}Desire`, `${library[index].desireToPlay}`);
+            localStorage.setItem(`myLibrary${index}Icon`, `${library[index].icon}`);
+            localStorage.setItem(`myLibrary${index}Beat`, `${library[index].beat}`);
+            // localStorage.setItem(`myLibrary${index}Div`, `${library[index].div.innerHTML}`);
+
+            index++;
+        }
+
+            // Game Object data
+        // let name;
+        // let platform;
+        // let owned;
+        // let desireToPlay;
+        // let icon;
+        // let beat;
+        // let div;
+
+    }
+
+}
+
+function readFromLocalStorage() {
+
+    let numObjects = localStorage.getItem('myLibraryLength');
+
+    if(numObjects > 0) {
+
+
+        let tempName;
+        let tempPlatform;
+        let tempOwned;
+        let tempDesire;
+        let tempIcon;
+        let tempBeat;
+
+
+        let index = 0;
+        while (index < numObjects) {
+
+            tempName = localStorage.getItem(`myLibrary${index}Name`);
+            tempPlatform = localStorage.getItem(`myLibrary${index}Platform`);
+            tempOwned = localStorage.getItem(`myLibrary${index}Owned`);
+            tempDesire = localStorage.getItem(`myLibrary${index}Desire`);
+            tempIcon = localStorage.getItem(`myLibrary${index}Icon`);
+            tempBeat = localStorage.getItem(`myLibrary${index}Beat`);
+
+            Object.create(Game.prototype).initGame(tempName, tempPlatform, tempOwned, tempDesire, tempIcon, tempBeat);
+
+            index++;
+        }
+
+        updateDisplay();
+
+        addEventListenerToModify();
+
+        return;
+    } else {
+        return;
+    }
 
 
 
+}
 
 
 // Functions for later reference
