@@ -8,6 +8,8 @@ function init () {
         useLocalStorage = false;
     }
 
+    readFromLocalStorage();
+
     // isLocalStorageEmpty();
 
 
@@ -482,10 +484,7 @@ function isLocalStorageEmpty() {
 // How do I convert myLibrary to a reasonable string
 function toLocalStorage ( library ) {
 
-    // To-Do
-        // Clear existing localStorage
-        // Convert myLibrary information to DOMString and pass to localStorage
-        // Covert each gameObject's info to DOMString and pass to localStorage
+    if( !useLocalStorage) return;
 
     // Clear existing localStorage
     localStorage.clear();
@@ -527,6 +526,8 @@ function toLocalStorage ( library ) {
 
 function readFromLocalStorage() {
 
+    if( !useLocalStorage) return;
+    
     let numObjects = localStorage.getItem('myLibraryLength');
 
     if(numObjects > 0) {
