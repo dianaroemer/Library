@@ -8,16 +8,12 @@ function init () {
         useLocalStorage = false;
     }
 
-    isLocalStorageEmpty();
+    // isLocalStorageEmpty();
 
 
     // Add sample games to library
-    sampleGames();
-
-    updateDisplay();
-
-    addEventListenerToModify();
-
+    // addSampleGames();
+ 
     return;
 }
 
@@ -86,6 +82,8 @@ querySaveButton.addEventListener('click', () => {
     // Add EventListener to new gameObject's modify button
     addEventListenerToModify();
 
+    toLocalStorage(myLibrary);
+
     toggleQueryMenu();
 });
 
@@ -104,11 +102,12 @@ queryDeleteButton.addEventListener('click', () => {
         // console.log(found + " is my found index");
 
         shelf.removeChild(modifyTarget.div);
-        
         myLibrary.splice(found, 1);
         
+        toLocalStorage(myLibrary);
+
         modifyTarget = null;
-        isModify = false
+        isModify = false;
     }
 
     toggleQueryMenu();
@@ -222,12 +221,14 @@ Game.prototype.generateInnerHTML = function() {
         displayName = displayName.slice(0, 19) + "...";
     }
 
+
+
     this.div.innerHTML = `<div class="platform-icon"> <img src='${platformLink}' alt="${this.platform} Game Platform Logo" class="slot-platform-icon">      </div class="platform-icon">`;
     this.div.innerHTML += `<img src="${this.icon}" alt="${this.name} Video Game Logo" class="slot-icon">`
     this.div.innerHTML += `<b>${displayName}</b> <br>`;
     this.div.innerHTML += `Owned: ${this.owned ? 'Yes' : 'No' } <br>`;
     this.div.innerHTML += `Desire to Play: ${this.desireToPlay}/10 <br>`;
-    this.div.innerHTML += `Beat: ${this.beat ? "True" : "False" } <br>`;
+    this.div.innerHTML += `Beat: ${(this.beat) ? "True" : "False" } <br>`;
     this.div.innerHTML += `<button class="slot-button">Modify</button>`;
 
 }
@@ -287,6 +288,14 @@ function addGameToLibrary( gameInfo ) {
 
 }
 
+//
+function addSampleGames() {
+
+    sampleGames();
+    updateDisplay();
+    addEventListenerToModify();
+
+}
 
 // ---------------------------- queryMenu Functions ----------------------------
 
@@ -446,9 +455,9 @@ function isLocalStorageEmpty() {
 // localStorage.setItem('test', 'bigger test');
 // localStorage.setItem('myLibraryLength', myLibrary.length);
 
-// How do I convert myLibrary to a reasonable string
-    // Include a myLibrary length value
 
+
+// How do I convert myLibrary to a reasonable string
 function toLocalStorage ( library ) {
 
     // To-Do
@@ -500,14 +509,12 @@ function readFromLocalStorage() {
 
     if(numObjects > 0) {
 
-
         let tempName;
         let tempPlatform;
         let tempOwned;
         let tempDesire;
         let tempIcon;
         let tempBeat;
-
 
         let index = 0;
         while (index < numObjects) {
@@ -519,7 +526,15 @@ function readFromLocalStorage() {
             tempIcon = localStorage.getItem(`myLibrary${index}Icon`);
             tempBeat = localStorage.getItem(`myLibrary${index}Beat`);
 
-            Object.create(Game.prototype).initGame(tempName, tempPlatform, tempOwned, tempDesire, tempIcon, tempBeat);
+            // Type checking this.beat back into a boolean when retrieved as a DOMstring from localStorage
+            let beatBool;
+            if(tempBeat === 'true') {
+                beatBool = true;
+            } else {
+                beatBool = false;
+            }
+
+            Object.create(Game.prototype).initGame(tempName, tempPlatform, tempOwned, tempDesire, tempIcon, beatBool);
 
             index++;
         }
@@ -532,8 +547,6 @@ function readFromLocalStorage() {
     } else {
         return;
     }
-
-
 
 }
 
