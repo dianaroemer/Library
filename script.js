@@ -8,6 +8,9 @@ function init () {
         useLocalStorage = false;
     }
 
+    isLocalStorageEmpty();
+
+
     // Add sample games to library
     sampleGames();
 
@@ -394,7 +397,6 @@ function updateDisplay() {
 // function that detects whether localStorage is both supported and available:
     // Pulled from link - 
     // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
-
 function storageAvailable(type) {
     var storage;
     try {
@@ -420,9 +422,44 @@ function storageAvailable(type) {
     }
 }
 
+function isLocalStorageEmpty() {
+    console.log("I am isLocalStorageEmpty, I still need functionality implemented here");
+    
+    if(localStorage.key(0) === null ){
+        // yes, instert functionality here
+        console.log("localStorage is empty");
+    } else {
+        // no, insert functionality here
+        console.log("localStorage has values, here they are") 
+            for ( let i = 0; localStorage.key(i) != null; i++) {
+                console.log(`${localStorage.key(i)} : ${localStorage.getItem(localStorage.key(i))}`);
+            }
+    }
+}
+
+localStorage.setItem('test', 'bigger test');
+localStorage.setItem('myLibraryLength', myLibrary.length);
+
+// How do I convert myLibrary to a reasonable string
+    // Include a myLibrary length value
+
+localStorage.getItem
 
 
 
+
+
+// Functions for later reference
+// Storage.key()
+    // When passed a number n, this method will return the name of the nth key in the storage.
+// Storage.getItem()
+    // When passed a key name, will return that key's value.
+// Storage.setItem()
+    // When passed a key name and value, will add that key to the storage, or update that key's value if it already exists.
+// Storage.removeItem()
+    // When passed a key name, will remove that key from the storage.
+// Storage.clear()
+    // When invoked, will empty all keys out of the storage.
 
 
 init();
