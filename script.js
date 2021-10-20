@@ -10,9 +10,6 @@ function init () {
 
     readFromLocalStorage();
 
-    // isLocalStorageEmpty();
-
-
     // Add sample games to library
     // addSampleGames();
  
@@ -45,6 +42,9 @@ const queryDeleteButton = document.querySelector('#queryDeleteButton');
 const optionsToggle = document.querySelector('.optionsToggle');
 const optionsContainer = document.querySelector('.optionsContainer');
 const optionsSampleButton = document.querySelector('#sampleGames');
+const aboutToggle = document.querySelector('.aboutToggle');
+const aboutContainer = document.querySelector('.aboutContainer');
+
 
 // menuOpen prevents the user from clicking additional modify buttons or add buttons whenever a queryMenu is already open
 let menuOpen = false;
@@ -180,6 +180,18 @@ optionsSampleButton.addEventListener('click', () => {
 
 })
 
+aboutToggle.addEventListener('click', () => {
+    console.log(`You've clicked the about toggle`);
+
+    let currDisplay = aboutContainer.style.display;
+    // console.log(`You've clicked the options menu!`);
+    if ( currDisplay == "block" ) {
+        aboutContainer.style.display = "none"
+    } else {
+        aboutContainer.style.display = "block";
+    }
+
+});
 
 // -------------------------------- Constructor --------------------------------
 // Object constructor to make game objects
@@ -422,17 +434,6 @@ function updateDisplay() {
 
 // ---------------------------- localStorage ----------------------------
 
-// To do
-// Test whether or not the browser can use localStore.
-// If you can, test whether or not localStorage is currently populated
-// If you cannot, draw up sample objects
-// If localStorage is currently populated, localStorage.getItem() on currently stored vales
-// Parse the retreieved getItem() values into functional gameObjects, and add them to myLibrary[]
-// After all objects have been called from localStorage, CLEAR LOCALSTORAGE BEFORE RE-ADDING VALUES TO PREVENT RECURSIVE ADDING ON EACH PAGE REFRESH
-// Add current myLibrary[] values to localStorage
-
-// If you can use localStorage, add new values to localStorage whenever adding, updating, or removing gameObjects
-
 // function that detects whether localStorage is both supported and available:
     // Pulled from link - 
     // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
@@ -475,11 +476,6 @@ function isLocalStorageEmpty() {
             }
     }
 }
-
-// localStorage.setItem('test', 'bigger test');
-// localStorage.setItem('myLibraryLength', myLibrary.length);
-
-
 
 // How do I convert myLibrary to a reasonable string
 function toLocalStorage ( library ) {
@@ -574,17 +570,7 @@ function readFromLocalStorage() {
 }
 
 
-// Functions for later reference
-// Storage.key()
-    // When passed a number n, this method will return the name of the nth key in the storage.
-// Storage.getItem()
-    // When passed a key name, will return that key's value.
-// Storage.setItem()
-    // When passed a key name and value, will add that key to the storage, or update that key's value if it already exists.
-// Storage.removeItem()
-    // When passed a key name, will remove that key from the storage.
-// Storage.clear()
-    // When invoked, will empty all keys out of the storage.
 
+// ---------------------------- init() ----------------------------
 
 init();

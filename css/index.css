@@ -15,8 +15,7 @@ body {
 }
 
 nav {
-    height: 12%;
-    min-height: 100px;
+    height: 100px;
     max-height: 150px;
     background-color: #EBBCBC;
 
@@ -206,7 +205,77 @@ nav ul li {
     box-shadow: 0px 2px 6px gray;
 }
 
-/* ---------------- This is the styling for the options menu ---------------- */
+/* --------------------- Animate Nav Toggles --------------------- */
+
+.optionsToggle {
+    position:relative;
+}
+
+.optionsToggle:after {
+    content: '';
+    width: 0;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555358;
+    transition: width 0.3s;
+}
+
+.optionsToggle:hover:after {
+    width:70%;
+}
+
+.aboutToggle {
+    position:relative;
+}
+
+.aboutToggle:after {
+    content: '';
+    width: 0;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555358;
+    transition: width 0.3s;
+}
+
+.aboutToggle:hover:after {
+    width:70%;
+}
+
+
+
+.portfolioToggle {
+    position:relative;
+}
+
+.portfolioToggle a {
+    text-decoration: none;
+    color: black;
+}
+
+.portfolioToggle:after {
+    content: '';
+    width: 0px;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555358;
+    transition: width 0.3s;
+}
+
+.portfolioToggle:hover:after {
+    width:70%;
+}
+
+/* ---------------- Options menu ---------------- */
+
 .optionsContainer {
     display: none;
     position: fixed;
@@ -216,10 +285,9 @@ nav ul li {
     left: calc(50% - 100px);
     background-color: #555358;
 
-    transition-duration: 0.4s;
-    transform: translateY(10px);
+    /* transition-duration: 0.4s;
+    transform: translateY(10px); */
 }
-
 
 
 .optionsMenu {
@@ -235,3 +303,27 @@ nav ul li {
     border-radius: 5px;
     box-shadow: 0px 2px 6px gray;
 }
+
+/* ---------------- About  ---------------- */
+
+.aboutContainer {
+    display: none;
+    position: fixed;
+    /* padding: 4px; */
+    /* height: 400px; */
+    width: 500px;
+    top: calc(50% - 200px);
+    left: calc(50% - 250px);
+    background-color: #555358;
+    text-align:center;
+    z-index: 10;
+}
+
+.aboutContent {
+    margin: 10px;
+    padding: 4px;
+    background-color: #afb1b6;
+}
+
+
+

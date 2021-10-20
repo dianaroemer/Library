@@ -39,13 +39,10 @@
                 Video Game Library
 
             </div>
-
             <ul>
                 <li class="optionsToggle">Options
                     <div class="optionsContainer">
                         <div class="optionsMenu">
-        
-        
                             Options Menu
                             <br>
                             <button id="sampleGames" class="optionsSampleButton">
@@ -55,8 +52,25 @@
                     </div>
 
                 </li>
-                <li>About</li>
-                <li>Portfolio</li>
+                <li class="aboutToggle">About
+                    <div class="aboutContainer">
+                        <div class="aboutContent">
+                            This project is designed to explore objects and prototyping functionality. Each game is stored as an independant object with inherent values, like name, or a string containing a link to a logo. <br> <br>
+                            In addition, each gameObject has an initGame function that is called from the object's prototype, to save on individual object memory and provide for future scalability. <br> <br>
+                            Whenever a new game is initialized, a reference to the object is added to the myLibrary[], which contains references to all active gameObjects. The dynamic functions of the page are all handled via eventListeners that hand-off the app's current state via global variables (bad security practice, I know, but saves on overhead). <br> <br>
+                            Finally, the app also uses a primative localStorage system, in which any changes made to the page on a browser that has localStorage available, are written to localStorage. Whenever the page is initialized, a reader function populates the webpage with any previously existing gameObjects from localStorage, maintaining state across multiple sessions. 
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </li>
+                <li class="portfolioToggle">
+                    <a href="https://github.com/dominicroemer">Portfolio</a>
+                </li>
             </ul>
 
             <img src="images/nav-menu.png" class="nav-menu-icon">
