@@ -1,6 +1,12 @@
 // Initiator function that builds all relevant variables and instantiates them appropriately
 function init () {
 
+    // Test for local storage support and availability, see storageAvailable comments for more details
+    if(storageAvailable('localStorage')) {
+        useLocalStorage = true;
+    } else {
+        useLocalStorage = false;
+    }
 
     // Add sample games to library
     sampleGames();
@@ -38,6 +44,8 @@ const queryDeleteButton = document.querySelector('#queryDeleteButton');
 let menuOpen = false;
 let isModify = false;
 let modifyTarget;
+
+let useLocalStorage;
 
 
 
@@ -104,7 +112,6 @@ queryDeleteButton.addEventListener('click', () => {
 // This eventListener is set as a function because it will need to be called whenever a new gameObject and subsequent .slot are added, as their new modify elements will need their own eventListeners.
     // This functionality could be changed to be more efficient - instead of adding event listeners to every modifyButton whenever the Library is changed, it could add EventListener's once at init(), and only again when adding a new singular gameObject.
 function addEventListenerToModify () {
-
 
     let buttonList = document.querySelectorAll('.slot-button');
 
@@ -370,6 +377,49 @@ function updateDisplay() {
     return;
 
 }
+
+// ---------------------------- localStorage ----------------------------
+
+// To do
+// Test whether or not the browser can use localStore.
+// If you can, test whether or not localStorage is currently populated
+// If you cannot, draw up sample objects
+// If localStorage is currently populated, localStorage.getItem() on currently stored vales
+// Parse the retreieved getItem() values into functional gameObjects, and add them to myLibrary[]
+// After all objects have been called from localStorage, CLEAR LOCALSTORAGE BEFORE RE-ADDING VALUES TO PREVENT RECURSIVE ADDING ON EACH PAGE REFRESH
+// Add current myLibrary[] values to localStorage
+
+// If you can use localStorage, add new values to localStorage whenever adding, updating, or removing gameObjects
+
+// function that detects whether localStorage is both supported and available:
+    // Pulled from link - 
+    // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+
+function storageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
 
 
 
