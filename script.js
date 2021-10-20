@@ -39,6 +39,11 @@ const addSlot = document.querySelector(`.addSlot`);
 const queryMenu = document.querySelector('.queryMenu');
 const querySaveButton = document.querySelector('#querySaveButton');
 const queryDeleteButton = document.querySelector('#queryDeleteButton');
+
+const optionsToggle = document.querySelector('.optionsToggle');
+const optionsContainer = document.querySelector('.optionsContainer');
+const optionsSampleButton = document.querySelector('#sampleGames');
+
 // menuOpen prevents the user from clicking additional modify buttons or add buttons whenever a queryMenu is already open
 let menuOpen = false;
 let isModify = false;
@@ -154,6 +159,24 @@ function addEventListenerToModify () {
     });
 }
 
+optionsToggle.addEventListener('click', () => {
+
+    let currDisplay = optionsContainer.style.display;
+    // console.log(`You've clicked the options menu!`);
+    if ( currDisplay == "block" ) {
+        optionsContainer.style.display = "none"
+    } else {
+        optionsContainer.style.display = "block";
+    }
+
+})
+
+optionsSampleButton.addEventListener('click', () => {
+
+    // console.log("You're trying to add sample games?");
+    addSampleGames();
+
+})
 
 
 // -------------------------------- Constructor --------------------------------
@@ -288,7 +311,6 @@ function addGameToLibrary( gameInfo ) {
 
 }
 
-//
 function addSampleGames() {
 
     sampleGames();

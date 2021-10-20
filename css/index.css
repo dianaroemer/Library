@@ -205,3 +205,33 @@ nav ul li {
     border-radius: 5px;
     box-shadow: 0px 2px 6px gray;
 }
+
+/* ---------------- This is the styling for the options menu ---------------- */
+.optionsContainer {
+    display: none;
+    position: fixed;
+    height: 80px;
+    width: 200px;
+    top: calc(50% - 40px);
+    left: calc(50% - 100px);
+    background-color: #555358;
+
+    transition-duration: 0.4s;
+    transform: translateY(10px);
+}
+
+
+
+.optionsMenu {
+    background-color: #afb1b6;
+    margin: 10px;
+    text-align: center;
+    padding: 4px;
+}
+
+.optionsSampleButton {
+    margin-top: 3px;
+    padding: 4px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px gray;
+}
