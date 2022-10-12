@@ -206,7 +206,8 @@ const Game = function() {
 
 }
 
-Game.prototype.initGame = function(name, platform, owned, desireToPlay, icon, beat){
+Game.prototype.initGame = function(name, 
+                platform, owned, desireToPlay, icon, beat){
     this.name = name;
     this.platform = platform;
     this.owned = owned;
