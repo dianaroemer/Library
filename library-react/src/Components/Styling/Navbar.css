@@ -1,0 +1,182 @@
+
+
+.navbarContainer {
+    background-color: #EBBCBC;
+    height: 75px;
+    /* border-style: solid;
+    border-radius: 2px; 
+    border-color: orange; 
+    border-width: 10px; */
+}
+
+
+
+nav {
+    /* height: 12%; */
+    height: 100px;
+    min-height: 100px;
+    max-height: 150px;
+    background-color: #EBBCBC;
+    overflow: visible;
+
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px 0;
+    margin-bottom: 7px;
+
+    border-radius: 0px 0px 6px 6px;
+    box-shadow: 0px 0px 7px black;
+
+}
+
+.navLeft {
+    padding-left: 15px;
+}
+
+.navTitle {
+    flex: 1;
+    text-align: right;
+    padding-left: 14%;
+    font-size: 22px;
+}
+
+nav ul {
+    flex: 1;
+    text-align: right;
+    padding-right: 30px;
+    flex-shrink: 3;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+.navMenuIcon {
+    width: 30px;
+    padding-right: 1%;
+}
+
+/* --------------------- Animate Nav Toggles --------------------- */
+
+.navOptionsToggle {
+    position:relative;
+}
+
+.navOptionsToggle:after {
+    content: '';
+    width: 0;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555358;
+    transition: width 0.3s;
+}
+
+.navOptionsToggle:hover:after {
+    width:70%;
+}
+
+.navAboutToggle {
+    position:relative;
+}
+
+.navAboutToggle:after {
+    content: '';
+    width: 0;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555358;
+    transition: width 0.3s;
+}
+
+.navAboutToggle:hover:after {
+    width:70%;
+}
+
+.navPortfolioToggle {
+    position:relative;
+}
+
+.navPortfolioToggle a {
+    text-decoration: none;
+    color: black;
+}
+
+.navPortfolioToggle:after {
+    content: '';
+    width: 0;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555358;
+    transition: width 0.3s;
+}
+
+.navPortfolioToggle:hover:after {
+    width:70%;
+}
+
+/* ---------------- Options menu ---------------- */
+
+.optionsContainer {
+    display: block;
+    position: fixed;
+    height: 80px;
+    width: 200px;
+    top: calc(50% - 40px);
+    left: calc(50% - 100px);
+    background-color: #555358;
+
+    /* transition-duration: 0.4s;
+    transform: translateY(10px); */
+}
+
+.optionsMenu {
+    background-color: #afb1b6;
+    margin: 10px;
+    text-align: center;
+    padding: 4px;
+}
+
+.optionsSampleButton {
+    margin-top: 3px;
+    padding: 4px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px gray;
+}
+
+/* ---------------- About Container ---------------- */
+
+.aboutContainer {
+    display: block;
+    position: fixed;
+    /* padding: 4px; */
+    /* height: 400px; */
+    width: 500px;
+    top: calc(50% - 200px);
+    left: calc(50% - 250px);
+    background-color: #555358;
+    text-align:center;
+    z-index: 10;
+}
+
+.aboutContent {
+    margin: 10px;
+    padding: 4px;
+    background-color: #afb1b6;
+    white-space: pre-line;
+
+}
+
