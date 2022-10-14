@@ -2,7 +2,8 @@ import React, { Component, useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar';
 
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite'
+// import {getFirestore, collection, getDocs, addDoc, serverTimestamp, query } from 'firebase/firestore/lite'
+import {doc, onSnapshot, getFirestore, getDocs, addDoc, serverTimestamp, query, collection} from "firebase/firestore"
 
 
 
@@ -17,7 +18,8 @@ function App(props) {
       const docRef = await addDoc(collection(db, "testCollection"), {
         firstName: "bugger",
         lastName: "everything",
-        year: 2022
+        year: 2022,
+        timeStamp: serverTimestamp()
       });
       console.log('Document written with id: ', docRef.id);
     } catch (e) {
@@ -31,43 +33,85 @@ function App(props) {
     async () => {await getDocs(collection(db, "testCollection"))}
   );
 
-  
-
   function handleTestButtonClick1(e){
     e.preventDefault();
-    // querySnapshot.forEach((doc) => {
-    //   console.log(`${doc.id} => ${doc.data()}`);
-    // });
-    // console.log(querySnapshot);
-    // console.log(getTestCollection(db));
-    const newVals = getTestCollection(db);
-    console.log(newVals);
-
-    
-
+    getTestCollection(db);
   }
 
   async function getTestCollection(db){
     const testCol = collection(db, 'testCollection');
     const testSnapshot = await getDocs(testCol);
     const contentList = testSnapshot.docs.map(doc => doc.data());
+    console.log(contentList);
+    contentList.forEach( (doc) => {
+      console.log(doc.timeStamp);
+    })
     return contentList;
   }
 
-  // async function establishQuerySnapshot(){
+  // const unsub = onSnapshot(doc(db, "testCollection", "timeStamp"), (doc) => {
+  //   console.log('Current Data: ', doc.data)
+  // })
 
-  //   setQuerySnapshot(await getDocs(collection(db, "testCollection")))
-  //   querySnapshot.forEach((doc) => {
-  //     console.log(`${doc.id} => ${doc.data()}`);
-  //   });
+  // const [unsub, setUnsub] = useState(
+  //   () => {
+  //     const q = query(collection(db, "testCollection"));
+  //     console.log(q);
+  //     const us = onSnapshot( q, (querySnap) => {
+  //       const messages = [];
+  //       querySnap.forEach((doc) => {
+  //         messages.push(doc.data().timeStamp);
+  //       });
+  //       console.log("Current Data in Firestore: ", messages.join(", "));
+  //     });
+  //     return us;
+  //   } 
+  // )
 
-  // }
+  const [data, setData] = useState([]);
 
-  // useEffect( () => {
-  //   establishQuerySnapshot();
-  // }, [])
+  useEffect(() => {
+    // const q = query(collection(db, 'testCollection'));
+    // console.log(q);
 
-  // establishQuerySnapshot();
+    const coll = collection(db, 'testCollection');
+    // console.log(coll);
+    const q = query(coll);
+    // console.log(q);
+
+    const unsubscribe = onSnapshot(q, (querySnap) => {
+      const datum = [];
+      querySnap.forEach( (doc) => {
+        datum.push(doc.data().timeStamp.seconds);
+        setData(datum);
+      })
+      console.log('Current datum: ', datum);
+    })
+
+    return () => unsubscribe();
+
+    // const unsubscribe = onSnapshot(query(collection(db, "testCollection")), (post) => {
+      // console.log("Current Data: ", post.docs.data)
+    // })
+    // return () => unsubscribe();
+
+    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    //   const data = querySnapshot.docs.map(doc => doc.data())
+    //   this.setData(data)
+    // });
+    // return () => unsubscribe();
+  }, [])
+
+
+  const timeRows = []
+
+  data.forEach(element => {
+    timeRows.push(
+      <div>
+        {element}
+      </div>
+    )
+  })
 
 
   return (
@@ -82,6 +126,7 @@ function App(props) {
           handleTestButtonClick1(e);
         }}>test button 1</button>
       </div>
+      {timeRows}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
