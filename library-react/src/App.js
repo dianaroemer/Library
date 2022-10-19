@@ -71,8 +71,6 @@ function App(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // const q = query(collection(db, 'testCollection'));
-    // console.log(q);
 
     const coll = collection(db, 'testCollection');
     // console.log(coll);
@@ -90,17 +88,39 @@ function App(props) {
 
     return () => unsubscribe();
 
-    // const unsubscribe = onSnapshot(query(collection(db, "testCollection")), (post) => {
-      // console.log("Current Data: ", post.docs.data)
-    // })
-    // return () => unsubscribe();
-
-    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    //   const data = querySnapshot.docs.map(doc => doc.data())
-    //   this.setData(data)
-    // });
-    // return () => unsubscribe();
   }, [])
+
+  function handleLogData(e){
+    e.preventDefault();
+    console.log(data);
+  }
+
+  // Init the shelf that stores game objects and data
+  const [shelfData, setShelfData] = useState([]);
+  // Init the snapshot keeping the front-end up to date with the server's databse
+  useEffect(() => {
+    const q = query(collection(db, 'shelf'));
+
+    const unsubscribe = onSnapshot(q, (qSnapshot) => {
+      const datums = [];
+      qSnapshot.forEach( (doc) => {
+        datums.push(doc.data());
+        setShelfData(datums);
+      })
+      console.log(`Current Shelf Data: `, datums);
+    })
+
+    return () => unsubscribe();
+
+  }, [db])
+
+  function handleShelfData(e){
+    e.preventDefault();
+    console.log(shelfData);
+  }
+
+
+
 
 
   const timeRows = []
@@ -108,7 +128,7 @@ function App(props) {
   data.forEach(element => {
     timeRows.push(
       <div>
-        {element}
+        {new Date(element * 1000).toString()}
       </div>
     )
   })
@@ -125,8 +145,21 @@ function App(props) {
         <button onClick={(e) => {
           handleTestButtonClick1(e);
         }}>test button 1</button>
+
+        <button onClick={(e) => {
+          handleLogData(e);
+        }}>data to console</button>
+
+
+
       </div>
       {timeRows}
+
+      <button onClick={(e) => {
+          handleShelfData(e);
+        }}>log shelf data</button>
+
+
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
