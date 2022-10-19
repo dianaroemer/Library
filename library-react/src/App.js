@@ -130,7 +130,7 @@ function App(props) {
   const myLibrary = [];
 
   shelfData.forEach(element => {
-    const tile = <GameTile gameData={element.data}/>
+    const tile = <GameTile gameData={element.data} key={element.key}/>
 
     myLibrary.push(tile)
 
