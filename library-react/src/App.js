@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
+import uniqid from 'uniqid';
 import './App.css';
 import NavBar from './Components/NavBar';
 import GameTile from './Components/GameTile';
@@ -110,7 +111,9 @@ function App(props) {
     const unsubscribe = onSnapshot(q, (qSnapshot) => {
       const datums = [];
       qSnapshot.forEach( (doc) => {
-        datums.push(doc.data());
+        datums.push({
+          data: doc.data(),
+          key: uniqid()});
         setShelfData(datums);
       })
       console.log(`Current Shelf Data: `, datums);
@@ -127,7 +130,7 @@ function App(props) {
   const myLibrary = [];
 
   shelfData.forEach(element => {
-    const tile = <GameTile gameData={element}/>
+    const tile = <GameTile gameData={element.data}/>
 
     myLibrary.push(tile)
 
