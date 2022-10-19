@@ -1,0 +1,50 @@
+
+.slot {
+    height: 265px;
+    width: 200px;
+    background-color: #afb1b6;
+    box-shadow: 0px 0px 7px;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 15px 25px;
+
+    text-align: center;
+    line-height: 25px;
+
+}
+
+.platform-icon {
+    text-align: right;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    justify-content: flex-end;
+    position: relative;
+
+}
+
+.slot-platform-icon {
+    max-height: 40px;
+    max-width: 40px;
+    display: inline-block;
+    text-align: right;
+    align-self: right;
+    position: absolute;
+    bottom: -255px;
+    right: 5px;
+}
+
+.slot-icon {
+    max-height: 180px;
+    max-width: 180px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.slot-button {
+    margin-top: 3px;
+    padding: 4px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px gray;
+    /* background-color: hotpink; */
+}

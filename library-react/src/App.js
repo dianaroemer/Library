@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import './App.css';
 import NavBar from './Components/NavBar';
+import GameTile from './Components/GameTile';
 
 // import {getFirestore, collection, getDocs, addDoc, serverTimestamp, query } from 'firebase/firestore/lite'
 import {doc, onSnapshot, getFirestore, getDocs, addDoc, serverTimestamp, query, collection} from "firebase/firestore"
@@ -68,39 +69,44 @@ function App(props) {
   //   } 
   // )
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   const coll = collection(db, 'testCollection');
+  //   // console.log(coll);
+  //   const q = query(coll);
+  //   // console.log(q);
+  //   const unsubscribe = onSnapshot(q, (querySnap) => {
+  //     const datum = [];
+  //     querySnap.forEach( (doc) => {
+  //       datum.push(doc.data().timeStamp.seconds);
+  //       setData(datum);
+  //     })
+  //     console.log('Current datum: ', datum);
+  //   })
+  //   return () => unsubscribe();
+  // }, [])
+  // const timeRows = []
+  // data.forEach(element => {
+  //   timeRows.push(
+  //     <div>
+  //       {new Date(element * 1000).toString()}
+  //     </div>
+  //   )
+  // })
+  // function handleLogData(e){
+  //   e.preventDefault();
+  //   console.log(data);
+  // }
 
-  useEffect(() => {
 
-    const coll = collection(db, 'testCollection');
-    // console.log(coll);
-    const q = query(coll);
-    // console.log(q);
 
-    const unsubscribe = onSnapshot(q, (querySnap) => {
-      const datum = [];
-      querySnap.forEach( (doc) => {
-        datum.push(doc.data().timeStamp.seconds);
-        setData(datum);
-      })
-      console.log('Current datum: ', datum);
-    })
 
-    return () => unsubscribe();
-
-  }, [])
-
-  function handleLogData(e){
-    e.preventDefault();
-    console.log(data);
-  }
 
   // Init the shelf that stores game objects and data
   const [shelfData, setShelfData] = useState([]);
   // Init the snapshot keeping the front-end up to date with the server's databse
   useEffect(() => {
     const q = query(collection(db, 'shelf'));
-
     const unsubscribe = onSnapshot(q, (qSnapshot) => {
       const datums = [];
       qSnapshot.forEach( (doc) => {
@@ -109,35 +115,35 @@ function App(props) {
       })
       console.log(`Current Shelf Data: `, datums);
     })
-
     return () => unsubscribe();
-
   }, [db])
+
 
   function handleShelfData(e){
     e.preventDefault();
     console.log(shelfData);
   }
 
+  const myLibrary = [];
+
+  shelfData.forEach(element => {
+    const tile = <GameTile gameData={element}/>
+
+    myLibrary.push(tile)
 
 
-
-
-  const timeRows = []
-
-  data.forEach(element => {
-    timeRows.push(
-      <div>
-        {new Date(element * 1000).toString()}
-      </div>
-    )
   })
+
+
+
 
 
   return (
     <div className="App">
       <NavBar/>
-      <div>
+
+      {/* This is the test button div, set to not display, but easily toggled visibility if I need to access these buttons */}
+      <div className='devTestButtons' style={{display: 'none'}}>
         Shiiiyeeet
         <button onClick={(e) => {
           handleTestButtonClick(e);
@@ -145,19 +151,19 @@ function App(props) {
         <button onClick={(e) => {
           handleTestButtonClick1(e);
         }}>test button 1</button>
-
         <button onClick={(e) => {
-          handleLogData(e);
-        }}>data to console</button>
+        handleShelfData(e);
+      }}>log shelf data</button>
+      </div>
 
 
+
+      <div className='shelf'>
+
+        {myLibrary}
 
       </div>
-      {timeRows}
 
-      <button onClick={(e) => {
-          handleShelfData(e);
-        }}>log shelf data</button>
 
 
       {/* <header className="App-header">

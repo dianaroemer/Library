@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import './Styling/Navbar.css'
+import '../Styling/Navbar.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 
