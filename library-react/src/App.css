@@ -39,3 +39,55 @@
   transform: translateY(4px);
   transition-duration: 0;
 }
+
+
+/* ---------------- This is the styling for the query menu ---------------- */
+.queryMenu {
+  display: none;
+  position: fixed;
+  background-color: #555358;
+  width:350px;
+  height: 208px;
+  top: calc(50% - 90px);
+  left: calc(50% - 175px);
+}
+
+.queryMenuContainer {
+  margin: 10px;
+  background-color: #afb1b6;
+  padding: 10px;
+}
+
+.queryMenuInput {
+  border: solid;
+  border-width: 2px;
+  margin: 2px;
+  width: 240px;
+  padding: 3px;
+}
+
+.queryMenuCheck {
+  border: solid;
+  border-width: 20px;
+  margin: 2px;
+}
+
+.queryMenuSlider {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.queryButtons {
+  margin-top: 2px;
+  margin-left: 75px;
+}
+
+.queryCommitButton {
+  /* margin-left: 100px; */
+  /* margin-right: 0px; */
+  /* margin-top: 2px; */
+  padding: 4px;
+  margin-left: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 6px gray;
+}

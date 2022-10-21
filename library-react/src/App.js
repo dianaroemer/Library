@@ -51,57 +51,6 @@ function App(props) {
     return contentList;
   }
 
-  // const unsub = onSnapshot(doc(db, "testCollection", "timeStamp"), (doc) => {
-  //   console.log('Current Data: ', doc.data)
-  // })
-
-  // const [unsub, setUnsub] = useState(
-  //   () => {
-  //     const q = query(collection(db, "testCollection"));
-  //     console.log(q);
-  //     const us = onSnapshot( q, (querySnap) => {
-  //       const messages = [];
-  //       querySnap.forEach((doc) => {
-  //         messages.push(doc.data().timeStamp);
-  //       });
-  //       console.log("Current Data in Firestore: ", messages.join(", "));
-  //     });
-  //     return us;
-  //   } 
-  // )
-
-  // const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   const coll = collection(db, 'testCollection');
-  //   // console.log(coll);
-  //   const q = query(coll);
-  //   // console.log(q);
-  //   const unsubscribe = onSnapshot(q, (querySnap) => {
-  //     const datum = [];
-  //     querySnap.forEach( (doc) => {
-  //       datum.push(doc.data().timeStamp.seconds);
-  //       setData(datum);
-  //     })
-  //     console.log('Current datum: ', datum);
-  //   })
-  //   return () => unsubscribe();
-  // }, [])
-  // const timeRows = []
-  // data.forEach(element => {
-  //   timeRows.push(
-  //     <div>
-  //       {new Date(element * 1000).toString()}
-  //     </div>
-  //   )
-  // })
-  // function handleLogData(e){
-  //   e.preventDefault();
-  //   console.log(data);
-  // }
-
-
-
-
 
   // Init the shelf that stores game objects and data
   const [shelfData, setShelfData] = useState([]);
@@ -137,6 +86,12 @@ function App(props) {
 
   })
 
+  const [desireToPlayQueryMenu, setDesireToPlayQueryMenu] = useState(5);
+  function handleDesireToPlayListener(e){
+    e.preventDefault();
+    console.log(`You have adjusted the desireToPlaySlider in queryMenu `, e)
+    setDesireToPlayQueryMenu(e.target.value)
+  }
 
 
 
@@ -172,6 +127,78 @@ function App(props) {
           e.preventDefault();
           console.log('You clicked the addSlot button');
         }}> + </button>
+
+      <div className='queryMenu'>
+
+        <div className='queryMenuContainer'>
+
+          Name: 
+          <input className='queryMenuInput' 
+            value="What is this game's name?"
+            id='queryMenuName'/>
+          <br/>
+
+          Logo: 
+          <input type='url' 
+            className='queryMenuInput'
+            value="Link an image here!"
+            id='queryMenuIcon'/>
+          <br/>
+
+          Owned:
+          <input type='checkbox' 
+            className='queryMenuCheck'
+            id='queryMenuOwned'/>
+          <br/>
+
+          Desire to Play:
+          <input type='range' min='1' max="10" value={desireToPlayQueryMenu}
+            className='queryMenuSlider'
+            onInput={(e) => {
+              // e.preventDefault();
+              // console.log('you adjusted the desire to play slider')
+              handleDesireToPlayListener(e);
+            }}/>
+            <output>{desireToPlayQueryMenu}</output>
+            <br/>
+
+            Did you beat this game?: 
+            <input type='checkbox'
+              className='queryMenuCheck'
+              id='queryMenuBeat'/>
+            <br/>
+
+            Console:
+            <input type='radio' value='pc' 
+              className='queryMnuRadio'
+              name='console' defaultChecked/>
+              <label for="pc">PC</label>
+
+            <input type='radio' value='ps4' 
+              className='queryMnuRadio'
+              name='console'/>
+              <label for="pc">PS4</label>
+
+            <input type='radio' value='xbox' 
+              className='queryMnuRadio'
+              name='console'/>
+              <label for="pc">Xbox</label>
+
+            <input type='radio' value='switch' 
+              className='queryMnuRadio'
+              name='console'/>
+              <label for="pc">Switch</label>
+
+              <div className="queryButtons">
+                  <button className="queryCommitButton" id="querySaveButton"> Save </button>
+                  <button className="queryCommitButton" id="queryDeleteButton"> Delete </button>
+              </div>
+
+
+
+        </div>
+
+      </div>
 
 
 
