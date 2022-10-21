@@ -87,6 +87,31 @@ function App(props) {
 
   })
 
+  const [menuOpen, toggleMenuOpen] = useState(false);
+  function handleMenuOpen(){
+    console.log(`You're trying to open a menu!`);
+    if(!menuOpen){
+      console.log(`queryMenu is currently not open, Opening a new menu...`);
+      // DO THE THING TO OPEN THE MENU, something something show menuOpen
+      toggleMenuOpen(true);
+    } else {
+      console.log(`queryMenu is already open! Closing queryMenu...`)
+      toggleMenuOpen(false);
+    }
+  }
+
+  function handleClickAddButton(e){
+    e.preventDefault();
+    console.log(`You clicked the addSlot button. Checking queryMenu's state...`)
+    if(!menuOpen){
+      console.log(`queryMenu is currently closed! Opening queryMenu`);
+      handleMenuOpen()
+    } else {
+      console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
+    }
+
+
+  }
   
 
   return (
@@ -108,20 +133,18 @@ function App(props) {
       </div>
 
 
-
       <div className='shelf'>
-
         {myLibrary}
-
       </div>
+
 
       <button className='addSlot'
         onClick={(e) => {
-          e.preventDefault();
-          console.log('You clicked the addSlot button');
+          handleClickAddButton(e);
         }}> + </button>
 
-      <QueryMenu/>
+
+      {menuOpen && <QueryMenu/>}
 
 
       {/* <header className="App-header">

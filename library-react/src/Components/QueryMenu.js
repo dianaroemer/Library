@@ -10,7 +10,6 @@ function handleDesireToPlayListener(e){
     setDesireToPlayQueryMenu(e.target.value)
 }
 
-
 return (
 
     <div className='queryMenu'>
@@ -19,14 +18,14 @@ return (
 
       Name: 
       <input className='queryMenuInput' 
-        value="What is this game's name?"
+        defaultValue="What is this game's name?"
         id='queryMenuName'/>
       <br/>
 
       Logo: 
       <input type='url' 
         className='queryMenuInput'
-        value="Link an image here!"
+        defaultValue="Link an image here!"
         id='queryMenuIcon'/>
       <br/>
 
