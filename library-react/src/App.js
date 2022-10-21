@@ -167,6 +167,12 @@ function App(props) {
 
       </div>
 
+      <button className='addSlot'
+        onClick={(e) => {
+          e.preventDefault();
+          console.log('You clicked the addSlot button');
+        }}> + </button>
+
 
 
       {/* <header className="App-header">

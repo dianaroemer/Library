@@ -8,3 +8,34 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* ---------- addSlot Button Stlying ---------- */
+.addSlot {
+  display: block;
+  position: fixed;
+  height: 62px;
+  width: 62px;
+  border-radius: 40px;
+  font-size: 30px;
+  bottom: 35px;
+  right: 40px;
+  background-color: #EBBCBC;
+  box-shadow: 0 0 4px;
+  border-width: 1px;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  cursor:pointer;
+}
+
+.addSlot:hover {
+  background-color: #c79c9c;
+  transition-duration: .2s;
+  transform: scale(1.1) rotate(180deg);
+
+}
+
+.addSlot:active {
+  background-color: #fffafa;
+  transform: translateY(4px);
+  transition-duration: 0;
+}
