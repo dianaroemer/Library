@@ -3,6 +3,7 @@ import '../Styling/GameTile.css'
 
 function GameTile(props) {
 
+
     return(
 
         <div className='slot'>
