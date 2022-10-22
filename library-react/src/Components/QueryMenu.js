@@ -126,7 +126,9 @@ return (
           <label htmlFor='switch'>Switch</label>
 
           <div className="queryButtons">
-              <button className="queryCommitButton" id="querySaveButton"> Save </button>
+              <button className="queryCommitButton" id="querySaveButton">
+                Save
+                </button>
               <button className="queryCommitButton" id="queryDeleteButton"> Delete </button>
           </div>
 

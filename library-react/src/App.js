@@ -30,11 +30,9 @@ function App(props) {
     }
   }
 
-  // const querySnapshot = await getDocs(collection(db, 'testCollection'));
-
-  const [querySnapshot, setQuerySnapshot] = useState(
-    async () => {await getDocs(collection(db, "testCollection"))}
-  );
+  // const [querySnapshot, setQuerySnapshot] = useState(
+  //   async () => {await getDocs(collection(db, "testCollection"))}
+  // );
 
   function handleTestButtonClick1(e){
     e.preventDefault();
