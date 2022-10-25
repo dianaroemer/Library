@@ -1,3 +1,4 @@
+import { deleteDoc } from 'firebase/firestore';
 import React, {useState, useEffect} from 'react'
 import '../Styling/QueryMenu.css'
 
@@ -145,8 +146,12 @@ return (
                 Save
               </button>
               <button className="queryCommitButton" id="queryDeleteButton"
-                onClick={(e) => {
+                onClick={async (e) => {
                   // You clicked queryMenu's delete button, do the functionality here to make the delete function happen OR just close the menu
+                  if(props.queryMenuGameData || props.queryMenuGameRef){
+                    // Do the thing to delete the existing GameTile
+                    props.deleteGameTile(e, props.queryMenuGameData, props.queryMenuGameRef);
+                  } 
                   props.handleToggleMenu();
                   }}>
                 Delete 

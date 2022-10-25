@@ -6,7 +6,7 @@ import GameTile from './Components/GameTile';
 import QueryMenu from './Components/QueryMenu';
 
 // import {getFirestore, collection, getDocs, addDoc, serverTimestamp, query } from 'firebase/firestore/lite'
-import {doc, onSnapshot, getFirestore, getDocs, addDoc, serverTimestamp, query, collection, setDoc} from "firebase/firestore"
+import {doc, onSnapshot, getFirestore, getDocs, addDoc, serverTimestamp, query, collection, setDoc, deleteDoc} from "firebase/firestore"
 
 
 
@@ -134,7 +134,7 @@ function App(props) {
     console.log("You're trying to add a new doc. Its data is: ", queryMenuData);
     console.log('Trying to write new data to collection...');
     const docRef = await addDoc(collection(db, "shelf"), queryMenuData);
-    console.log('Document qritten with ID: ', docRef.id);
+    console.log('Document written with ID: ', docRef.id);
 
   }
 
@@ -146,6 +146,12 @@ function App(props) {
   function handleQueryMenuGameUpdate(gameData, docRef){
     gameData ? setQueryMenuGameData(gameData) : setQueryMenuGameData(null);
     docRef ? setQueryMenuGameRef(docRef) : setQueryMenuGameRef(null);
+  }
+
+  async function deleteGameTile(e, gameData, gameRef){
+    console.log(`Do the thing to delete this GameTile`);
+    console.log(`The current data trying to be deleted is: `, gameData, gameRef);
+    await deleteDoc(gameRef);
   }
   
 
@@ -183,7 +189,8 @@ function App(props) {
         handleToggleMenu={handleToggleMenu}
         addNewDoc={addNewDoc}
         queryMenuGameData={queryMenuGameData}
-        queryMenuGameRef={queryMenuGameRef}/>}
+        queryMenuGameRef={queryMenuGameRef}
+        deleteGameTile={deleteGameTile}/>}
 
 
       {/* <header className="App-header">
