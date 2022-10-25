@@ -3,6 +3,8 @@ import '../Styling/GameTile.css'
 
 function GameTile(props) {
 
+    
+
 
     return(
 
@@ -54,7 +56,7 @@ function GameTile(props) {
             Beat: {props.gameData.beat ? "True " : "False "}
             <br/>
             <button className='slot-button' 
-                onClick={(e) => e.preventDefault()}>
+                onClick={(e) => props.handleClickModify(e)}>
                     Modify
                 </button>
 

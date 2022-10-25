@@ -126,10 +126,14 @@ return (
           <label htmlFor='switch'>Switch</label>
 
           <div className="queryButtons">
-              <button className="queryCommitButton" id="querySaveButton">
+              <button className="queryCommitButton" id="querySaveButton"
+                onClick={(e) => {props.handleToggleMenu()}}>
                 Save
-                </button>
-              <button className="queryCommitButton" id="queryDeleteButton"> Delete </button>
+              </button>
+              <button className="queryCommitButton" id="queryDeleteButton"
+                onClick={(e) => {props.handleToggleMenu()}}>
+                Delete 
+              </button>
           </div>
 
 

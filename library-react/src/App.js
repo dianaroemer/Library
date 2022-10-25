@@ -78,7 +78,9 @@ function App(props) {
   const myLibrary = [];
 
   shelfData.forEach(element => {
-    const tile = <GameTile gameData={element.data} key={element.key}/>
+    const tile = <GameTile gameData={element.data} 
+                    key={element.key}
+                    handleClickModify={handleClickMenuOpen}/>
 
     myLibrary.push(tile)
 
@@ -86,7 +88,7 @@ function App(props) {
   })
 
   const [menuOpen, toggleMenuOpen] = useState(false);
-  function handleMenuOpen(){
+  function handleToggleMenu(){
     console.log(`You're trying to open a menu!`);
     if(!menuOpen){
       console.log(`queryMenu is currently not open, Opening a new menu...`);
@@ -98,16 +100,15 @@ function App(props) {
     }
   }
 
-  function handleClickAddButton(e){
+  function handleClickMenuOpen(e){
     e.preventDefault();
-    console.log(`You clicked the addSlot button. Checking queryMenu's state...`)
+    console.log(`You clicked a button to open queryMenu. Checking queryMenu's state...`)
     if(!menuOpen){
       console.log(`queryMenu is currently closed! Opening queryMenu`);
-      handleMenuOpen()
+      handleToggleMenu()
     } else {
       console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
     }
-
 
   }
   
@@ -138,11 +139,11 @@ function App(props) {
 
       <button className='addSlot'
         onClick={(e) => {
-          handleClickAddButton(e);
+          handleClickMenuOpen(e);
         }}> + </button>
 
 
-      {menuOpen && <QueryMenu/>}
+      {menuOpen && <QueryMenu handleToggleMenu={handleToggleMenu}/>}
 
 
       {/* <header className="App-header">
