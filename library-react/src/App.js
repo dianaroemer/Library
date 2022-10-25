@@ -149,9 +149,19 @@ function App(props) {
   }
 
   async function deleteGameTile(e, gameData, gameRef){
+    e.preventDefault();
     console.log(`Do the thing to delete this GameTile`);
     console.log(`The current data trying to be deleted is: `, gameData, gameRef);
     await deleteDoc(gameRef);
+  }
+
+  async function updateGameTile(e, gameData, gameRef){
+    e.preventDefault();
+    console.log(`Do the thing to update the existing game within the firebase`)
+    console.log(`New data is: `, gameData, gameRef)
+    
+    
+    await setDoc(gameRef, gameData, {merge : true});
   }
   
 
@@ -190,7 +200,8 @@ function App(props) {
         addNewDoc={addNewDoc}
         queryMenuGameData={queryMenuGameData}
         queryMenuGameRef={queryMenuGameRef}
-        deleteGameTile={deleteGameTile}/>}
+        deleteGameTile={deleteGameTile}
+        updateGameTile={updateGameTile}/>}
 
 
       {/* <header className="App-header">

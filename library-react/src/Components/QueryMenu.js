@@ -101,7 +101,7 @@ return (
         Console:
         <input type='radio' value='pc' 
           className='queryMenuRadio'
-          name='console' defaultChecked
+          name='console' 
           onChange={(e)=> {
             // console.log(`You selected the PC Console`);
             handleQueryMenuDataUpdate(e, 'platform')
@@ -111,6 +111,7 @@ return (
         <input type='radio' value='ps4' 
           className='queryMenuRadio'
           name='console'
+          // {queryMenuData.platform == "ps4" ? console.log('XXXXXXX') : console.log('OOOOOOOOOOO')}
           onChange={(e)=> {
             // console.log(`You selected the PS4 Console`);
             handleQueryMenuDataUpdate(e, 'platform')
@@ -139,8 +140,13 @@ return (
               <button className="queryCommitButton" id="querySaveButton"
                 onClick={(e) => {
                   // You clicked queryMenu's save button, do the functionality here to save a new GameTile OR update an existing GameTile
-                  console.log('Saving a new game to firebase...');
-                  props.addNewDoc(e, queryMenuData);
+                  if(props.queryMenuGameData || props.queryMenuGameRef){
+                    console.log(`Updating existing game in firestore...`)
+                    props.updateGameTile(e, queryMenuData, props.queryMenuGameRef)
+                  } else {
+                    console.log('Saving a new game to firebase...');
+                    props.addNewDoc(e, queryMenuData);
+                  }
                   props.handleToggleMenu();
                   }}>
                 Save
