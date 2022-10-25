@@ -59,9 +59,12 @@ function App(props) {
     const unsubscribe = onSnapshot(q, (qSnapshot) => {
       const datums = [];
       qSnapshot.forEach( (doc) => {
+        console.log(doc)
         datums.push({
           data: doc.data(),
-          key: uniqid()});
+          key: uniqid(),
+          docRef: doc.ref})
+          // docRef: doc(db, 'shelf', doc.id)});
         setShelfData(datums);
       })
       console.log(`Current Shelf Data: `, datums);
@@ -76,16 +79,17 @@ function App(props) {
   }
 
   const myLibrary = [];
-
   shelfData.forEach(element => {
     const tile = <GameTile gameData={element.data} 
                     key={element.key}
-                    handleClickModify={handleClickMenuOpen}/>
-
+                    docRef={element.docRef}
+                    handleClickModify={handleClickModify}/>
     myLibrary.push(tile)
-
-
   })
+
+
+
+  // ------------------ queryMenu toggles and functionality ------------------
 
   const [menuOpen, toggleMenuOpen] = useState(false);
   function handleToggleMenu(){
@@ -105,11 +109,24 @@ function App(props) {
     console.log(`You clicked a button to open queryMenu. Checking queryMenu's state...`)
     if(!menuOpen){
       console.log(`queryMenu is currently closed! Opening queryMenu`);
+      handleQueryMenuGameUpdate(null, null);
       handleToggleMenu()
     } else {
       console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
     }
+  }
 
+  function handleClickModify(e, gameData, docRef){
+    e.preventDefault();
+    console.log(`You are opening the queryMenu on an existing GameTile!`);
+    if(!menuOpen){
+      console.log(`Its data is: `, gameData, docRef);
+      console.log(`queryMenu is currently closed! Opening queryMenu`);
+      handleQueryMenuGameUpdate(gameData, docRef);
+      handleToggleMenu()
+    } else {
+      console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
+    }
   }
 
   async function addNewDoc(e, queryMenuData) {
@@ -119,6 +136,16 @@ function App(props) {
     const docRef = await addDoc(collection(db, "shelf"), queryMenuData);
     console.log('Document qritten with ID: ', docRef.id);
 
+  }
+
+
+
+  const [queryMenuGameData, setQueryMenuGameData] = useState(null);
+  const [queryMenuGameRef, setQueryMenuGameRef] = useState(null);
+  // When this function is called with null in gameData and docRef, the queryMenu opens in its default state, whereas when this function is passed gameData and a gameRef from a Modify onClick, it updates queryMenu to use the new values of the targeted click
+  function handleQueryMenuGameUpdate(gameData, docRef){
+    gameData ? setQueryMenuGameData(gameData) : setQueryMenuGameData(null);
+    docRef ? setQueryMenuGameRef(docRef) : setQueryMenuGameRef(null);
   }
   
 
@@ -154,7 +181,9 @@ function App(props) {
 
       {menuOpen && <QueryMenu 
         handleToggleMenu={handleToggleMenu}
-        addNewDoc={addNewDoc}/>}
+        addNewDoc={addNewDoc}
+        queryMenuGameData={queryMenuGameData}
+        queryMenuGameRef={queryMenuGameRef}/>}
 
 
       {/* <header className="App-header">

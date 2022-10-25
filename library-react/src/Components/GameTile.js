@@ -56,7 +56,7 @@ function GameTile(props) {
             Beat: {props.gameData.beat ? "True " : "False "}
             <br/>
             <button className='slot-button' 
-                onClick={(e) => props.handleClickModify(e)}>
+                onClick={(e) => props.handleClickModify(e, props.gameData, props.docRef)}>
                     Modify
                 </button>
 

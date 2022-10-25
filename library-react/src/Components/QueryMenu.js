@@ -38,9 +38,18 @@ function handleQueryMenuDataUpdate(e, targetField){
 
 }
 
+useEffect(()=>{
+  if(props.queryMenuGameData && props.queryMenuGameRef){
+    // Do the thing in QueryMenu when recieving incoming new data
+    console.log('I am in useEffect in queryMenu, I have a true queryMenuGameData & queryMenuGameRef')
+    setQueryMenuData(props.queryMenuGameData);
+  } 
+}, [props.queryMenuGameData, props.queryMenuGameRef])
+
 return (
 
     <div className='queryMenu'>
+      {console.log(props.queryMenuGameData, props.queryMenuGameRef)}
 
     <div className='queryMenuContainer'>
 
