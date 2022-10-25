@@ -102,38 +102,68 @@ return (
         <input type='radio' value='pc' 
           className='queryMenuRadio'
           name='console' 
+          defaultChecked
           onChange={(e)=> {
             // console.log(`You selected the PC Console`);
             handleQueryMenuDataUpdate(e, 'platform')
           }}/>
           <label htmlFor='pc'>PC</label>
 
-        <input type='radio' value='ps4' 
-          className='queryMenuRadio'
-          name='console'
-          // {queryMenuData.platform == "ps4" ? console.log('XXXXXXX') : console.log('OOOOOOOOOOO')}
-          onChange={(e)=> {
-            // console.log(`You selected the PS4 Console`);
-            handleQueryMenuDataUpdate(e, 'platform')
-          }}/>
+        {queryMenuData.platform === 'ps4' ? 
+            <input type='radio' value='ps4' 
+            className='queryMenuRadio'
+            name='console'
+            defaultChecked
+            onChange={(e)=> {
+              // console.log(`You selected the PS4 Console`);
+              handleQueryMenuDataUpdate(e, 'platform')
+            }}/> :
+            <input type='radio' value='ps4' 
+            className='queryMenuRadio'
+            name='console'
+            onChange={(e)=> {
+              // console.log(`You selected the PS4 Console`);
+              handleQueryMenuDataUpdate(e, 'platform')
+            }}/> }
+      
           <label htmlFor='ps4'>PS4</label>
 
-        <input type='radio' value='xbox' 
+
+        {queryMenuData.platform === 'xbox' ? 
+          <input type='radio' value='xbox' 
           className='queryMenuRadio'
           name='console'
+          defaultChecked
           onChange={(e)=> {
             // console.log(`You selected the Xbox Console`);
             handleQueryMenuDataUpdate(e, 'platform')
-          }}/>
+          }}/> :
+          <input type='radio' value='xbox' 
+            className='queryMenuRadio'
+            name='console'
+            onChange={(e)=> {
+              // console.log(`You selected the Xbox Console`);
+              handleQueryMenuDataUpdate(e, 'platform')
+            }}/>}
           <label htmlFor='xbox'>Xbox</label>
 
+
+        {queryMenuData.platform === 'switch' ? 
         <input type='radio' value='switch' 
           className='queryMenuRadio'
           name='console'
+          defaultChecked
           onChange={(e)=> {
             // console.log(`You selected the Switch Console`);
             handleQueryMenuDataUpdate(e, 'platform')
-          }}/>
+          }}/> :
+          <input type='radio' value='switch' 
+            className='queryMenuRadio'
+            name='console'
+            onChange={(e)=> {
+              // console.log(`You selected the Switch Console`);
+              handleQueryMenuDataUpdate(e, 'platform')
+            }}/> }
           <label htmlFor='switch'>Switch</label>
 
           <div className="queryButtons">
