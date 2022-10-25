@@ -12,7 +12,7 @@ function handleDesireToPlayListener(e){
 
 const [queryMenuData, setQueryMenuData] = useState({
   name: "What is this game's name?",
-  logo: "Link an image here!",
+  icon: "Link an image here!",
   owned: false,
   desireToPlay: 5,
   beat: false,
@@ -55,8 +55,8 @@ return (
       <input type='url' 
         className='queryMenuInput'
         id='queryMenuIcon'
-        value={queryMenuData.logo}
-        onChange={(e) => handleQueryMenuDataUpdate(e, 'logo')}/>
+        value={queryMenuData.icon}
+        onChange={(e) => handleQueryMenuDataUpdate(e, 'icon')}/>
       <br/>
 
       Owned:
@@ -127,11 +127,19 @@ return (
 
           <div className="queryButtons">
               <button className="queryCommitButton" id="querySaveButton"
-                onClick={(e) => {props.handleToggleMenu()}}>
+                onClick={(e) => {
+                  // You clicked queryMenu's save button, do the functionality here to save a new GameTile OR update an existing GameTile
+                  console.log('Saving a new game to firebase...');
+                  props.addNewDoc(e, queryMenuData);
+                  props.handleToggleMenu();
+                  }}>
                 Save
               </button>
               <button className="queryCommitButton" id="queryDeleteButton"
-                onClick={(e) => {props.handleToggleMenu()}}>
+                onClick={(e) => {
+                  // You clicked queryMenu's delete button, do the functionality here to make the delete function happen OR just close the menu
+                  props.handleToggleMenu();
+                  }}>
                 Delete 
               </button>
           </div>

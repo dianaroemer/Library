@@ -6,7 +6,7 @@ import GameTile from './Components/GameTile';
 import QueryMenu from './Components/QueryMenu';
 
 // import {getFirestore, collection, getDocs, addDoc, serverTimestamp, query } from 'firebase/firestore/lite'
-import {doc, onSnapshot, getFirestore, getDocs, addDoc, serverTimestamp, query, collection} from "firebase/firestore"
+import {doc, onSnapshot, getFirestore, getDocs, addDoc, serverTimestamp, query, collection, setDoc} from "firebase/firestore"
 
 
 
@@ -89,9 +89,9 @@ function App(props) {
 
   const [menuOpen, toggleMenuOpen] = useState(false);
   function handleToggleMenu(){
-    console.log(`You're trying to open a menu!`);
+    // console.log(`You're trying to toggle queryMenu!`);
     if(!menuOpen){
-      console.log(`queryMenu is currently not open, Opening a new menu...`);
+      console.log(`queryMenu is currently not open, Opening a new queryMenu...`);
       // DO THE THING TO OPEN THE MENU, something something show menuOpen
       toggleMenuOpen(true);
     } else {
@@ -109,6 +109,15 @@ function App(props) {
     } else {
       console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
     }
+
+  }
+
+  async function addNewDoc(e, queryMenuData) {
+    e.preventDefault();
+    console.log("You're trying to add a new doc. Its data is: ", queryMenuData);
+    console.log('Trying to write new data to collection...');
+    const docRef = await addDoc(collection(db, "shelf"), queryMenuData);
+    console.log('Document qritten with ID: ', docRef.id);
 
   }
   
@@ -143,7 +152,9 @@ function App(props) {
         }}> + </button>
 
 
-      {menuOpen && <QueryMenu handleToggleMenu={handleToggleMenu}/>}
+      {menuOpen && <QueryMenu 
+        handleToggleMenu={handleToggleMenu}
+        addNewDoc={addNewDoc}/>}
 
 
       {/* <header className="App-header">
