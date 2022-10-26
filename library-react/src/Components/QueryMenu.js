@@ -4,12 +4,12 @@ import '../Styling/QueryMenu.css'
 
 function QueryMenu(props){
 
-const [desireToPlayQueryMenu, setDesireToPlayQueryMenu] = useState(5);
-function handleDesireToPlayListener(e){
-    e.preventDefault();
-    console.log(`You have adjusted the desireToPlaySlider in queryMenu `, e)
-    setDesireToPlayQueryMenu(e.target.value)
-}
+// const [desireToPlayQueryMenu, setDesireToPlayQueryMenu] = useState(5);
+// function handleDesireToPlayListener(e){
+//     e.preventDefault();
+//     console.log(`You have adjusted the desireToPlaySlider in queryMenu `, e)
+//     setDesireToPlayQueryMenu(e.target.value)
+// }
 
 const [queryMenuData, setQueryMenuData] = useState({
   name: "What is this game's name?",
@@ -22,7 +22,7 @@ const [queryMenuData, setQueryMenuData] = useState({
 
 function handleQueryMenuDataUpdate(e, targetField){
   // console.log(`You're trying to update queryMenuData! Let's make some magic...`);
-  console.log(`You're targeting: |`, targetField, `| with a new value of: `, e.target.value)
+  // console.log(`You're targeting: |`, targetField, `| with a new value of: `, e.target.value)
 
   // Both owned and beat boolean values need their traditional javascript event scripts to run in order to properly toggle their selected status. In addition, the input-checkbox's value property has no relevance to the active boolean nature of its values; therefore I am manually adjusting the queryMenuData to reflect the appropriate booleans
   if(targetField === 'owned'){
@@ -42,7 +42,7 @@ function handleQueryMenuDataUpdate(e, targetField){
 useEffect(()=>{
   if(props.queryMenuGameData && props.queryMenuGameRef){
     // Do the thing in QueryMenu when recieving incoming new data
-    console.log('I am in useEffect in queryMenu, I have a true queryMenuGameData & queryMenuGameRef')
+    // console.log('I am in useEffect in queryMenu, I have a true queryMenuGameData & queryMenuGameRef')
     setQueryMenuData(props.queryMenuGameData);
   } 
 }, [props.queryMenuGameData, props.queryMenuGameRef])
@@ -50,7 +50,7 @@ useEffect(()=>{
 return (
 
     <div className='queryMenu'>
-      {console.log(props.queryMenuGameData, props.queryMenuGameRef)}
+      {/* {console.log(props.queryMenuGameData, props.queryMenuGameRef)} */}
 
     <div className='queryMenuContainer'>
 
@@ -171,10 +171,10 @@ return (
                 onClick={(e) => {
                   // You clicked queryMenu's save button, do the functionality here to save a new GameTile OR update an existing GameTile
                   if(props.queryMenuGameData || props.queryMenuGameRef){
-                    console.log(`Updating existing game in firestore...`)
+                    // console.log(`Updating existing game in firestore...`)
                     props.updateGameTile(e, queryMenuData, props.queryMenuGameRef)
                   } else {
-                    console.log('Saving a new game to firebase...');
+                    // console.log('Saving a new game to firebase...');
                     props.addNewDoc(e, queryMenuData);
                   }
                   props.handleToggleMenu();

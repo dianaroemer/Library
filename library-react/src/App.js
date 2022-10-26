@@ -59,7 +59,7 @@ function App(props) {
     const unsubscribe = onSnapshot(q, (qSnapshot) => {
       const datums = [];
       qSnapshot.forEach( (doc) => {
-        console.log(doc)
+        // console.log(doc)
         datums.push({
           data: doc.data(),
           key: uniqid(),
@@ -67,7 +67,7 @@ function App(props) {
           // docRef: doc(db, 'shelf', doc.id)});
         setShelfData(datums);
       })
-      console.log(`Current Shelf Data: `, datums);
+      // console.log(`Current Shelf Data: `, datums);
     })
     return () => unsubscribe();
   }, [db])
@@ -75,7 +75,7 @@ function App(props) {
 
   function handleShelfData(e){
     e.preventDefault();
-    console.log(shelfData);
+    // console.log(shelfData);
   }
 
   const myLibrary = [];
@@ -95,46 +95,46 @@ function App(props) {
   function handleToggleMenu(){
     // console.log(`You're trying to toggle queryMenu!`);
     if(!menuOpen){
-      console.log(`queryMenu is currently not open, Opening a new queryMenu...`);
+      // console.log(`queryMenu is currently not open, Opening a new queryMenu...`);
       // DO THE THING TO OPEN THE MENU, something something show menuOpen
       toggleMenuOpen(true);
     } else {
-      console.log(`queryMenu is already open! Closing queryMenu...`)
+      // console.log(`queryMenu is already open! Closing queryMenu...`)
       toggleMenuOpen(false);
     }
   }
 
   function handleClickMenuOpen(e){
     e.preventDefault();
-    console.log(`You clicked a button to open queryMenu. Checking queryMenu's state...`)
+    // console.log(`You clicked a button to open queryMenu. Checking queryMenu's state...`)
     if(!menuOpen){
-      console.log(`queryMenu is currently closed! Opening queryMenu`);
+      // console.log(`queryMenu is currently closed! Opening queryMenu`);
       handleQueryMenuGameUpdate(null, null);
       handleToggleMenu()
     } else {
-      console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
+      // console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
     }
   }
 
   function handleClickModify(e, gameData, docRef){
     e.preventDefault();
-    console.log(`You are opening the queryMenu on an existing GameTile!`);
+    // console.log(`You are opening the queryMenu on an existing GameTile!`);
     if(!menuOpen){
-      console.log(`Its data is: `, gameData, docRef);
-      console.log(`queryMenu is currently closed! Opening queryMenu`);
+      // console.log(`Its data is: `, gameData, docRef);
+      // console.log(`queryMenu is currently closed! Opening queryMenu`);
       handleQueryMenuGameUpdate(gameData, docRef);
       handleToggleMenu()
     } else {
-      console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
+      // console.log(`queryMenu is already open! I can do nothing until the currently existing queryMenu has been closed!`);
     }
   }
 
   async function addNewDoc(e, queryMenuData) {
     e.preventDefault();
-    console.log("You're trying to add a new doc. Its data is: ", queryMenuData);
-    console.log('Trying to write new data to collection...');
+    // console.log("You're trying to add a new doc. Its data is: ", queryMenuData);
+    // console.log('Trying to write new data to collection...');
     const docRef = await addDoc(collection(db, "shelf"), queryMenuData);
-    console.log('Document written with ID: ', docRef.id);
+    // console.log('Document written with ID: ', docRef.id);
 
   }
 
@@ -150,15 +150,15 @@ function App(props) {
 
   async function deleteGameTile(e, gameData, gameRef){
     e.preventDefault();
-    console.log(`Do the thing to delete this GameTile`);
-    console.log(`The current data trying to be deleted is: `, gameData, gameRef);
+    // console.log(`Do the thing to delete this GameTile`);
+    // console.log(`The current data trying to be deleted is: `, gameData, gameRef);
     await deleteDoc(gameRef);
   }
 
   async function updateGameTile(e, gameData, gameRef){
     e.preventDefault();
-    console.log(`Do the thing to update the existing game within the firebase`)
-    console.log(`New data is: `, gameData, gameRef)
+    // console.log(`Do the thing to update the existing game within the firebase`)
+    // console.log(`New data is: `, gameData, gameRef)
     
     
     await setDoc(gameRef, gameData, {merge : true});

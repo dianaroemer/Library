@@ -49,7 +49,7 @@ function GameTile(props) {
             
             <b>{props.gameData.name}</b>
             <br/>
-            Owned: { props.gameData.beat ? 'Yes ' : 'No '}
+            Owned: { props.gameData.owned ? 'Yes ' : 'No '}
             <br/>
             Desire to Play: {props.gameData.desireToPlay + "/10"}
             <br/>
