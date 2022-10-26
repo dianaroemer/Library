@@ -1,4 +1,3 @@
-import { deleteDoc } from 'firebase/firestore';
 import React, {useState, useEffect} from 'react'
 import '../Styling/QueryMenu.css'
 

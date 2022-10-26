@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import '../Styling/GameTile.css'
 
 function GameTile(props) {

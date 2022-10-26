@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import uniqid from 'uniqid';
 import './App.css';
 import NavBar from './Components/NavBar';
@@ -6,7 +6,7 @@ import GameTile from './Components/GameTile';
 import QueryMenu from './Components/QueryMenu';
 
 // import {getFirestore, collection, getDocs, addDoc, serverTimestamp, query } from 'firebase/firestore/lite'
-import {doc, onSnapshot, getFirestore, getDocs, addDoc, serverTimestamp, query, collection, setDoc, deleteDoc} from "firebase/firestore"
+import {onSnapshot, getFirestore, addDoc, query, collection, setDoc, deleteDoc} from "firebase/firestore"
 
 
 
@@ -14,41 +14,41 @@ function App(props) {
 
   const db = getFirestore(props.firebaseapp);
 
-  async function handleTestButtonClick(e){
-    e.preventDefault();
-    console.log(`you clicked the test button`);
-    try{
-      const docRef = await addDoc(collection(db, "testCollection"), {
-        firstName: "bugger",
-        lastName: "everything",
-        year: 2022,
-        timeStamp: serverTimestamp()
-      });
-      console.log('Document written with id: ', docRef.id);
-    } catch (e) {
-      console.log("Error adding document: ", e);
-    }
-  }
+  // async function handleTestButtonClick(e){
+  //   e.preventDefault();
+  //   console.log(`you clicked the test button`);
+  //   try{
+  //     const docRef = await addDoc(collection(db, "testCollection"), {
+  //       firstName: "bugger",
+  //       lastName: "everything",
+  //       year: 2022,
+  //       timeStamp: serverTimestamp()
+  //     });
+  //     console.log('Document written with id: ', docRef.id);
+  //   } catch (e) {
+  //     console.log("Error adding document: ", e);
+  //   }
+  // }
 
   // const [querySnapshot, setQuerySnapshot] = useState(
   //   async () => {await getDocs(collection(db, "testCollection"))}
   // );
 
-  function handleTestButtonClick1(e){
-    e.preventDefault();
-    getTestCollection(db);
-  }
+  // function handleTestButtonClick1(e){
+  //   e.preventDefault();
+  //   getTestCollection(db);
+  // }
 
-  async function getTestCollection(db){
-    const testCol = collection(db, 'testCollection');
-    const testSnapshot = await getDocs(testCol);
-    const contentList = testSnapshot.docs.map(doc => doc.data());
-    console.log(contentList);
-    contentList.forEach( (doc) => {
-      console.log(doc.timeStamp);
-    })
-    return contentList;
-  }
+  // async function getTestCollection(db){
+  //   const testCol = collection(db, 'testCollection');
+  //   const testSnapshot = await getDocs(testCol);
+  //   const contentList = testSnapshot.docs.map(doc => doc.data());
+  //   console.log(contentList);
+  //   contentList.forEach( (doc) => {
+  //     console.log(doc.timeStamp);
+  //   })
+  //   return contentList;
+  // }
 
 
   // Init the shelf that stores game objects and data
@@ -73,10 +73,6 @@ function App(props) {
   }, [db])
 
 
-  function handleShelfData(e){
-    e.preventDefault();
-    // console.log(shelfData);
-  }
 
   const myLibrary = [];
   shelfData.forEach(element => {
@@ -134,7 +130,7 @@ function App(props) {
     // console.log("You're trying to add a new doc. Its data is: ", queryMenuData);
     // console.log('Trying to write new data to collection...');
     const docRef = await addDoc(collection(db, "shelf"), queryMenuData);
-    // console.log('Document written with ID: ', docRef.id);
+    console.log('Document written with ID: ', docRef.id);
 
   }
 
@@ -170,7 +166,7 @@ function App(props) {
       <NavBar/>
 
       {/* This is the test button div, set to not display, but easily toggled visibility if I need to access these buttons */}
-      <div className='devTestButtons' style={{display: 'none'}}>
+      {/* <div className='devTestButtons' style={{display: 'none'}}>
         Shiiiyeeet
         <button onClick={(e) => {
           handleTestButtonClick(e);
@@ -181,7 +177,7 @@ function App(props) {
         <button onClick={(e) => {
         handleShelfData(e);
       }}>log shelf data</button>
-      </div>
+      </div> */}
 
 
       <div className='shelf'>
