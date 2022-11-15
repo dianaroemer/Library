@@ -53,11 +53,18 @@ function NavBar(props) {
                         <div className="optionsContainer">
                             <div className="optionsMenu">
                                 Options Menu
-                                <button id="sampleGames" class="optionsSampleButton"
+                                <button id="sampleGames" className="optionsSampleButton"
                                     onClick={(e) => {handleLoadSampleGamesButtonClick(e)}}
                                     >
                                     Load Sample Games?
                                 </button>
+                                {/* <button id="logInButton"
+                                    className="optionsSampleButton"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        console.log(`You clicked the login button`)}}>
+                                    Log In
+                                </button> */}
                             </div>
                         </div>
                     

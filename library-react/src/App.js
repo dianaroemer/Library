@@ -80,7 +80,8 @@ function App(props) {
                     key={element.key}
                     docRef={element.docRef}
                     handleClickModify={handleClickModify}/>
-    myLibrary.push(tile)
+                    // console.log(tile);
+                    myLibrary.push(tile);
   })
 
 
@@ -159,7 +160,15 @@ function App(props) {
     
     await setDoc(gameRef, gameData, {merge : true});
   }
-  
+
+
+    // ------------------ login and logout functionliaty ------------------
+
+    // const [isLoggedIn, toggleIsLoggedIn] = useState(false);
+    // function handleToggleIsLoggedIn() {
+    //   console.log(`You're trying to toggle the current logged in status!`);
+    // }
+
 
   return (
     <div className="App">
@@ -217,5 +226,95 @@ function App(props) {
     </div>
   );
 }
+
+// function App(props) {
+//   return (
+//     <div>
+//       <NavBar/>
+
+//       Shit goes here, ayy
+//       <br/>
+
+//       Links to include:
+//       <ul>
+//         <li>
+//           Intro/Landing Page
+//         </li>
+//         <li>
+//           About Me
+//         </li>
+//         <li>
+//           Portfolio and Samples
+//         </li>
+//         <li>
+//           Skills and Blog (With search and tag system?)
+//         </li>
+//         <li>
+//           Contact/Hire Me
+//         </li>
+//         <li>
+//           Developer dashboard for adding new content to (Portfolio and Samples) and (Skills and Blog)? This is optional after the rest of the content has been implemented
+//         </li>
+//       </ul>
+
+//       Basic Content layouts
+//       <ul>
+//         <li>
+//           <b>About Me</b>
+//           <div>
+//             Content goes here
+//           </div>
+//         </li>
+//         <li>
+//           <b>Portfolio and Samples</b>
+//           <div>
+//             Content goes here
+//             <ul>
+//               <li>I worked on this thing?</li>
+//             </ul>
+//           </div>
+//         </li>
+//         <li>
+        
+//         <b>Skills and Blog</b>
+
+//           <div>
+//             Content posts about my most recent skills goes into this section
+//             <div><br/></div>
+//             <ul>
+//               <li>
+//                 Async/Await and Back End as a Service (Google Firebase with Cloud Firestore, Firebase Storage, and Google Analytics)
+//                 <div>Project - Library (rebuilt an earlier portfolio project using React for Firebase functionality)</div>
+//               </li>
+//             </ul>
+//             <ul>
+//               <li>
+//                 ReactRouter, Responsive mobile-first web design(and first app for consumer use)
+//                 <div>Project - Thirteenth Understanding (Large scale personal project)</div>
+//               </li>
+//             </ul>
+//             <ul>
+//               <li>
+//                 ReactJS
+//                 <div>Project - CV Application(Hooks (useState, useEffect), Object Components, State Management)</div>
+//                 <div>Project- Memorization Card Game</div>
+//               </li>
+//             </ul>
+//             <br/>
+//           </div>
+//         </li>
+//         <li>
+//         Contact and Hire Me
+//           <div>
+//             Content information and other goodies goes here, this should be a pretty straightforward page to implement
+//           </div>
+//         </li>
+//       </ul>
+
+//     </div>
+
+//   )
+// }
+
 
 export default App;

@@ -133,7 +133,6 @@ nav ul li {
 .optionsContainer {
     display: block;
     position: fixed;
-    height: 80px;
     width: 200px;
     top: calc(50% - 40px);
     left: calc(50% - 100px);
