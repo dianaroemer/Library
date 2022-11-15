@@ -4,7 +4,7 @@
     position: fixed;
     background-color: #555358;
     width:350px;
-    height: 208px;
+    /* height: 208px; */
     top: calc(50% - 90px);
     left: calc(50% - 175px);
   }
